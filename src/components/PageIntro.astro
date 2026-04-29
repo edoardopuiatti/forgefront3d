@@ -1,0 +1,46 @@
+---
+import ButtonLink from "./ButtonLink.astro";
+import Container from "./Container.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  primaryHref,
+  primaryLabel,
+  secondaryHref,
+  secondaryLabel,
+} = Astro.props;
+---
+
+<section class="border-b border-white/10">
+  <Container>
+    <div class="grid gap-8 py-16 lg:grid-cols-[1.3fr_0.7fr] lg:items-end lg:py-20">
+      <div class="space-y-5">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        <h1 class="max-w-4xl text-4xl font-semibold text-white sm:text-5xl">{title}</h1>
+        <p class="max-w-3xl text-base leading-7 text-stone-300 sm:text-lg">{description}</p>
+      </div>
+      {(primaryHref || secondaryHref) && (
+        <div class="flex flex-wrap gap-3 lg:justify-end">
+          {primaryHref && primaryLabel && <ButtonLink href={primaryHref}>{primaryLabel}</ButtonLink>}
+          {secondaryHref && secondaryLabel && (
+            <ButtonLink href={secondaryHref} variant="secondary">
+              {secondaryLabel}
+            </ButtonLink>
+          )}
+        </div>
+      )}
+    </div>
+  </Container>
+</section>

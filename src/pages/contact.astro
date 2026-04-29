@@ -1,0 +1,75 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
+import Container from "../components/Container.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch about a custom 3D print job, replacement part, prototype, or quote request."
+  pathname="/contact/"
+>
+  <PageIntro
+    eyebrow="Contact"
+    title="Reach out with a file, a sketch, or just a question."
+    description="Technical and non-technical customers are both welcome. If you know exactly what you need, great. If you only know the problem you need to solve, that is still enough to start."
+    primaryHref="/quote/#quote-form"
+    primaryLabel="Upload Your File"
+    secondaryHref={`mailto:${site.email}`}
+    secondaryLabel="Email Directly"
+  />
+
+  <section class="section-shell">
+    <Container>
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <ContactForm />
+
+        <div class="space-y-5">
+          <article class="panel-soft p-6 sm:p-8">
+            <p class="eyebrow">Direct Contact</p>
+            <div class="mt-5 space-y-4 text-sm leading-7 text-stone-300">
+              <p>
+                Email:
+                <a class="ml-2 text-white transition hover:text-amber-300" href={`mailto:${site.email}`}>
+                  {site.email}
+                </a>
+              </p>
+              <p>
+                Phone or WhatsApp placeholder:
+                <a class="ml-2 text-white transition hover:text-amber-300" href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}>
+                  {site.phone}
+                </a>
+              </p>
+              <p>Hours: {site.hours}</p>
+              <p>{site.responseTime}</p>
+            </div>
+          </article>
+
+          <article class="panel-soft p-6 sm:p-8">
+            <p class="eyebrow">Service Area</p>
+            <h2 class="mt-4 text-2xl font-semibold text-white">Local service area and pickup block</h2>
+            <p class="mt-4 text-sm leading-7 text-stone-300">
+              Replace this section with the actual city, neighborhood, or delivery area served by
+              the business. This is also the place to mention whether pickup is by appointment only.
+            </p>
+            <p class="mt-4 rounded-2xl border border-dashed border-white/15 bg-stone-900/50 px-4 py-6 text-sm text-stone-400">
+              Replace with a local map embed, simple service area graphic, or business pickup
+              instructions.
+            </p>
+            <p class="mt-4 text-sm text-stone-400">{site.addressLine}</p>
+          </article>
+
+          <article class="panel-soft p-6 sm:p-8">
+            <p class="eyebrow">Best For</p>
+            <p class="mt-4 text-sm leading-7 text-stone-300">
+              Use the contact page for custom jobs, pre-quote questions, printability questions, or
+              cases where you do not have a clean upload-ready file yet.
+            </p>
+          </article>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

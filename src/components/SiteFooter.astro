@@ -1,0 +1,68 @@
+---
+import Container from "./Container.astro";
+import { navLinks, site } from "../data/site";
+---
+
+<footer class="border-t border-white/10 bg-black/20">
+  <Container>
+    <div class="grid gap-10 py-14 lg:grid-cols-[1.2fr_0.8fr_0.7fr]">
+      <div class="space-y-4">
+        <p class="text-lg font-semibold text-white">{site.name}</p>
+        <p class="max-w-md text-sm leading-7 text-stone-400">
+          Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and small
+          batches. Built for customers who want clear answers and a real quote without enterprise
+          complexity.
+        </p>
+        <p class="text-xs text-stone-500">
+          Replace contact details, testimonials, and gallery photos with real business assets before
+          launch.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">Pages</p>
+        <ul class="mt-5 space-y-3 text-sm text-stone-300">
+          {navLinks.map((link) => (
+            <li>
+              <a class="transition hover:text-white" href={link.href}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a class="transition hover:text-white" href="/privacy-policy/">
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a class="transition hover:text-white" href="/terms-of-service/">
+              Terms of Service
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">Contact</p>
+        <div class="mt-5 space-y-3 text-sm text-stone-300">
+          <p>
+            <a class="transition hover:text-white" href={`mailto:${site.email}`}>
+              {site.email}
+            </a>
+          </p>
+          <p>
+            <a class="transition hover:text-white" href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}>
+              {site.phone}
+            </a>
+          </p>
+          <p>{site.hours}</p>
+          <p class="text-stone-500">{site.responseTime}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 py-5 text-xs text-stone-500">
+      <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+    </div>
+  </Container>
+</footer>

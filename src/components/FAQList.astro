@@ -1,0 +1,28 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  firstOpen?: number;
+}
+
+const { items, firstOpen = -1 } = Astro.props;
+---
+
+<div class="space-y-4">
+  {items.map((item, index) => (
+    <details
+      class="panel-soft group overflow-hidden p-5 open:bg-white/[0.05]"
+      open={index === firstOpen}
+    >
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left text-base font-semibold text-white">
+        <span>{item.question}</span>
+        <span class="text-xl text-stone-500 transition group-open:rotate-45">+</span>
+      </summary>
+      <p class="mt-4 max-w-3xl text-sm leading-7 text-stone-300">{item.answer}</p>
+    </details>
+  ))}
+</div>

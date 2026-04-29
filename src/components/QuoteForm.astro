@@ -1,0 +1,271 @@
+---
+import { fileTypes, materials, priceFactors } from "../data/site";
+
+interface Props {
+  id?: string;
+}
+
+const { id = "quote-form" } = Astro.props;
+---
+
+<div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+  <div class="space-y-8">
+    <div class="panel p-6 sm:p-8">
+      <p class="eyebrow">Pricing</p>
+      <h2 class="mt-4 text-3xl font-semibold text-white">Quote requests are reviewed by a real person.</h2>
+      <p class="mt-4 text-sm leading-7 text-stone-300">
+        Pricing depends on part size, material, quantity, complexity, finish, and urgency. Upload
+        your file and the job details, and a manual quote will be sent back with any practical
+        recommendations.
+      </p>
+      <div class="mt-6 flex flex-wrap gap-2">
+        {fileTypes.map((type) => (
+          <span class="badge">{type}</span>
+        ))}
+      </div>
+      <p class="field-help">
+        Preferred file types: STL, STEP, OBJ, and 3MF. If instant quoting is not available for
+        your job, a manual quote will be sent instead.
+      </p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2">
+      {priceFactors.map((factor) => (
+        <article class="panel-soft p-5">
+          <h3 class="text-base font-semibold text-white">{factor.title}</h3>
+          <p class="mt-2 text-sm leading-6 text-stone-300">{factor.description}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="panel-soft p-6">
+      <h3 class="text-lg font-semibold text-white">First time ordering a print?</h3>
+      <p class="mt-3 text-sm leading-7 text-stone-300">
+        That is fine. If you are not sure about material, dimensions, or file prep, include what
+        you know and ask for help. A short description or rough deadline is enough to get started.
+      </p>
+    </div>
+  </div>
+
+  <div class="panel p-6 sm:p-8" data-quote-widget>
+    <!-- Integration note: replace the demo submit behavior with Formspree, Netlify Forms, Resend, or a custom API endpoint before launch. -->
+    <form class="space-y-5" id={id} data-quote-form enctype="multipart/form-data">
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label class="field-label" for={`${id}-name`}>Name</label>
+          <input class="field-input" id={`${id}-name`} name="name" type="text" autocomplete="name" required />
+        </div>
+        <div>
+          <label class="field-label" for={`${id}-email`}>Email</label>
+          <input class="field-input" id={`${id}-email`} name="email" type="email" autocomplete="email" required />
+        </div>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label class="field-label" for={`${id}-phone`}>Phone <span class="text-stone-500">(optional)</span></label>
+          <input class="field-input" id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" />
+        </div>
+        <div>
+          <label class="field-label" for={`${id}-company`}>Company <span class="text-stone-500">(optional)</span></label>
+          <input class="field-input" id={`${id}-company`} name="company" type="text" autocomplete="organization" />
+        </div>
+      </div>
+
+      <div>
+        <label class="field-label" for={`${id}-file`}>File upload</label>
+        <label
+          class="block cursor-pointer rounded-[1.75rem] border border-dashed border-white/15 bg-stone-900/50 px-5 py-8 text-center transition hover:border-amber-300/60 hover:bg-stone-900"
+          for={`${id}-file`}
+          data-dropzone
+        >
+          <span class="block text-sm font-semibold text-white">Drag your file here or browse from your device</span>
+          <span class="mt-2 block text-sm text-stone-400">
+            Supported: {fileTypes.join(", ")}. Multiple files are allowed.
+          </span>
+          <input
+            class="sr-only"
+            id={`${id}-file`}
+            name="projectFiles"
+            type="file"
+            accept=".stl,.step,.stp,.obj,.3mf"
+            multiple
+            data-file-input
+            required
+          />
+        </label>
+        <p class="field-help" data-file-feedback>
+          If your files are too large to attach here, mention that in the project notes and a file
+          transfer option can be arranged.
+        </p>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label class="field-label" for={`${id}-material`}>Preferred material</label>
+          <select class="field-input" id={`${id}-material`} name="preferredMaterial" required>
+            <option value="">Select an option</option>
+            <option value="recommend">Not sure, please recommend</option>
+            {materials.map((material) => (
+              <option value={material.name}>{material.name}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for={`${id}-quantity`}>Quantity</label>
+          <input class="field-input" id={`${id}-quantity`} name="quantity" type="number" min="1" value="1" required />
+        </div>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label class="field-label" for={`${id}-dimensions`}>Dimensions <span class="text-stone-500">(optional)</span></label>
+          <input class="field-input" id={`${id}-dimensions`} name="dimensions" type="text" placeholder="Example: 120 x 80 x 35 mm" />
+        </div>
+        <div>
+          <label class="field-label" for={`${id}-color`}>Color preference</label>
+          <input class="field-input" id={`${id}-color`} name="colorPreference" type="text" placeholder="Black, gray, white, or specify" />
+        </div>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div>
+          <label class="field-label" for={`${id}-finish`}>Finish preference</label>
+          <select class="field-input" id={`${id}-finish`} name="finishPreference" required>
+            <option value="">Select a finish</option>
+            <option value="standard">Standard print finish</option>
+            <option value="smoother">Smoother appearance is important</option>
+            <option value="functional">Function matters more than appearance</option>
+            <option value="not-sure">Not sure yet</option>
+          </select>
+        </div>
+        <div>
+          <label class="field-label" for={`${id}-deadline`}>Needed by</label>
+          <input class="field-input" id={`${id}-deadline`} name="deadline" type="date" />
+        </div>
+      </div>
+
+      <fieldset>
+        <legend class="field-label">Delivery or pickup</legend>
+        <div class="grid gap-3 sm:grid-cols-3">
+          <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
+            <input type="radio" name="fulfillment" value="shipping" checked />
+            <span>Shipping</span>
+          </label>
+          <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
+            <input type="radio" name="fulfillment" value="pickup" />
+            <span>Local pickup</span>
+          </label>
+          <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
+            <input type="radio" name="fulfillment" value="either" />
+            <span>Either works</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div>
+        <label class="field-label" for={`${id}-message`}>Project notes</label>
+        <textarea
+          class="field-input min-h-36"
+          id={`${id}-message`}
+          name="message"
+          placeholder="Tell us what the part does, where it will be used, whether fit matters, and anything else that would help with the quote."
+          required
+        ></textarea>
+      </div>
+
+      <div class="rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-stone-200">
+        Honest note: this form requests a quote. It does not run a fake instant pricing engine. If
+        a manual review is needed, you will receive a follow-up by email.
+      </div>
+
+      <button class="btn-primary w-full" type="submit">Send Quote Request</button>
+    </form>
+
+    <div class="space-y-4" data-quote-success hidden tabindex="-1">
+      <div class="inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
+        Quote request ready to send
+      </div>
+      <h3 class="text-2xl font-semibold text-white">Thanks. Your quote request has been captured in the demo UI.</h3>
+      <p class="text-sm leading-7 text-stone-300">
+        Connect this form to Formspree, Netlify Forms, Resend, or a custom API route so uploaded
+        files and project details are delivered to the business inbox in production.
+      </p>
+      <button class="btn-secondary" type="button" data-reset-form>Submit another request</button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  const bindQuoteWidgets = () => {
+    document.querySelectorAll("[data-quote-widget]").forEach((widget) => {
+      if (widget.dataset.bound === "true") return;
+      widget.dataset.bound = "true";
+
+      const form = widget.querySelector("[data-quote-form]");
+      const success = widget.querySelector("[data-quote-success]");
+      const fileInput = widget.querySelector("[data-file-input]");
+      const feedback = widget.querySelector("[data-file-feedback]");
+      const dropzone = widget.querySelector("[data-dropzone]");
+      const resetButton = widget.querySelector("[data-reset-form]");
+      const defaultFeedback = feedback?.textContent ?? "";
+
+      const updateFeedback = () => {
+        const files = fileInput?.files;
+        if (!feedback) return;
+        if (files && files.length > 0) {
+          const names = Array.from(files).map((file) => file.name).join(", ");
+          feedback.textContent = `Selected file${files.length > 1 ? "s" : ""}: ${names}`;
+        } else {
+          feedback.textContent = defaultFeedback;
+        }
+      };
+
+      fileInput?.addEventListener("change", updateFeedback);
+
+      ["dragenter", "dragover"].forEach((eventName) => {
+        dropzone?.addEventListener(eventName, (event) => {
+          event.preventDefault();
+          dropzone.classList.add("border-amber-300", "bg-stone-900");
+        });
+      });
+
+      ["dragleave", "drop"].forEach((eventName) => {
+        dropzone?.addEventListener(eventName, (event) => {
+          event.preventDefault();
+          dropzone.classList.remove("border-amber-300", "bg-stone-900");
+        });
+      });
+
+      dropzone?.addEventListener("drop", (event) => {
+        const droppedFiles = event.dataTransfer?.files;
+        if (droppedFiles && droppedFiles.length && fileInput) {
+          fileInput.files = droppedFiles;
+          updateFeedback();
+        }
+      });
+
+      form?.addEventListener("submit", (event) => {
+        if (!form.reportValidity()) return;
+        event.preventDefault();
+        form.hidden = true;
+        success.hidden = false;
+        form.reset();
+        updateFeedback();
+        success.focus();
+      });
+
+      resetButton?.addEventListener("click", () => {
+        success.hidden = true;
+        form.hidden = false;
+        form.querySelector("input, select, textarea")?.focus();
+      });
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindQuoteWidgets);
+  } else {
+    bindQuoteWidgets();
+  }
+</script>

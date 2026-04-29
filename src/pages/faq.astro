@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import FAQList from "../components/FAQList.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { faqs } from "../data/site";
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Answers to common questions about file types, pricing, lead times, materials, one-off parts, shipping, and print finish expectations."
+  pathname="/faq/"
+>
+  <PageIntro
+    eyebrow="FAQ"
+    title="Useful answers before you send a file."
+    description="These are the questions most customers ask before ordering a custom 3D printed part. If your situation is different, the contact page is there for that."
+    primaryHref="/quote/#quote-form"
+    primaryLabel="Upload Your File"
+    secondaryHref="/contact/"
+    secondaryLabel="Contact Us"
+  />
+
+  <section class="section-shell">
+    <Container>
+      <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <aside class="panel-soft p-6 sm:p-8">
+          <p class="eyebrow">Quick Notes</p>
+          <h2 class="mt-4 text-3xl font-semibold text-white">What this service is built for.</h2>
+          <ul class="mt-6 space-y-3 text-sm leading-7 text-stone-300">
+            <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">One-off parts and small production runs are welcome.</li>
+            <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">Quotes are reviewed by a real person, not a fake automated tool.</li>
+            <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">If you do not have a print-ready file, you can still get in touch.</li>
+            <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">Lead times and finish quality depend on the part, material, and print setup.</li>
+          </ul>
+        </aside>
+
+        <div>
+          <FAQList items={faqs} firstOpen={0} />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

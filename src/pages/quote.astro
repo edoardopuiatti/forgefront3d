@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import PageIntro from "../components/PageIntro.astro";
+import QuoteForm from "../components/QuoteForm.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+---
+
+<BaseLayout
+  title="Pricing & Get a Quote"
+  description="Upload a 3D file and request a manual quote for custom printed parts, prototypes, and small batches."
+  pathname="/quote/"
+>
+  <PageIntro
+    eyebrow="Pricing & Get A Quote"
+    title="Upload your file to receive a quote."
+    description="Pricing depends on size, material, quantity, complexity, finish, and urgency. This page is intentionally honest: it is a quote request workflow, not a fake instant pricing tool."
+  />
+
+  <section class="section-shell">
+    <Container>
+      <QuoteForm />
+    </Container>
+  </section>
+
+  <section class="section-shell border-t border-white/10 bg-black/20">
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-2">
+        <article class="panel-soft p-6 sm:p-8">
+          <SectionHeading
+            eyebrow="Need Help First?"
+            title="You can still ask for a quote even if the file is not final."
+            description="If the model needs review, the dimensions are not confirmed, or you only have a rough concept, include those details in the notes. The best next step can still be discussed."
+          />
+        </article>
+        <article class="panel-soft p-6 sm:p-8">
+          <SectionHeading
+            eyebrow="Optional Guide"
+            title="Add a future file-prep guide here."
+            description="This layout has room for a downloadable guide such as 'How to prepare your 3D file for quoting.' Link a PDF or simple guide page when the business is ready."
+          />
+        </article>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

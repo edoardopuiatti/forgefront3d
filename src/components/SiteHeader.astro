@@ -1,0 +1,91 @@
+---
+import ButtonLink from "./ButtonLink.astro";
+import Container from "./Container.astro";
+import { navLinks, site } from "../data/site";
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const isActive = (href: string) =>
+  href === "/" ? currentPath === href : currentPath.startsWith(href);
+---
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-stone-950/90 backdrop-blur" data-site-header>
+  <Container>
+    <div class="flex items-center justify-between gap-4 py-4">
+      <a href="/" class="flex items-center gap-3 text-white">
+        <span class="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
+          <span class="text-sm font-semibold tracking-[0.2em] text-amber-300">F3</span>
+        </span>
+        <span>
+          <span class="block text-sm font-semibold">{site.name}</span>
+          <span class="block text-xs text-stone-400">Custom 3D printing service</span>
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm transition hover:text-white",
+              isActive(link.href) ? "text-white" : "text-stone-400",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <div class="hidden md:block">
+        <ButtonLink href="/quote/#quote-form">Upload Your File</ButtonLink>
+      </div>
+
+      <button
+        type="button"
+        class="btn-subtle md:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-button
+      >
+        Menu
+      </button>
+    </div>
+  </Container>
+
+  <div id="mobile-menu" class="hidden border-t border-white/10 md:hidden" data-mobile-menu>
+    <Container>
+      <nav class="flex flex-col gap-4 py-5" aria-label="Mobile navigation">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm transition hover:text-white",
+              isActive(link.href) ? "text-white" : "text-stone-400",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+        <ButtonLink href="/quote/#quote-form" className="mt-2 w-full">
+          Upload Your File
+        </ButtonLink>
+      </nav>
+    </Container>
+  </div>
+</header>
+
+<script is:inline>
+  const header = document.querySelector("[data-site-header]");
+  const menuButton = header?.querySelector("[data-menu-button]");
+  const mobileMenu = document.querySelector("[data-mobile-menu]");
+
+  menuButton?.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+    menuButton.setAttribute("aria-expanded", String(!isOpen));
+    mobileMenu?.classList.toggle("hidden", isOpen);
+  });
+</script>

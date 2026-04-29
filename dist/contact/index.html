@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Contact | Forgefront 3D</title><meta name="description" content="Get in touch about a custom 3D print job, replacement part, prototype, or quote request."><link rel="canonical" href="https://www.forgefront3d.example/contact/"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta property="og:type" content="website"><meta property="og:title" content="Contact | Forgefront 3D"><meta property="og:description" content="Get in touch about a custom 3D print job, replacement part, prototype, or quote request."><meta property="og:url" content="https://www.forgefront3d.example/contact/"><meta property="og:image" content="https://www.forgefront3d.example/social-share.svg"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Contact | Forgefront 3D"><meta name="twitter:description" content="Get in touch about a custom 3D print job, replacement part, prototype, or quote request."><meta name="twitter:image" content="https://www.forgefront3d.example/social-share.svg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Forgefront 3D","description":"Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and short-run production. Upload a file or request a quote.","url":"https://www.forgefront3d.example","email":"hello@forgefront3d.example","telephone":"(555) 010-3040","areaServed":"Local pickup and shipped orders","makesOffer":{"@type":"Offer","itemOffered":{"@type":"Service","name":"Custom 3D printing service"}}}</script><link rel="stylesheet" href="/_astro/contact.Did7IIeP.css"></head> <body> <header class="sticky top-0 z-50 border-b border-white/10 bg-stone-950/90 backdrop-blur" data-site-header> <div class="container-shell">  <div class="flex items-center justify-between gap-4 py-4"> <a href="/" class="flex items-center gap-3 text-white"> <span class="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5"> <span class="text-sm font-semibold tracking-[0.2em] text-amber-300">F3</span> </span> <span> <span class="block text-sm font-semibold">Forgefront 3D</span> <span class="block text-xs text-stone-400">Custom 3D printing service</span> </span> </a> <nav class="hidden items-center gap-7 md:flex" aria-label="Primary navigation"> <a href="/" class="text-sm transition hover:text-white text-stone-400"> Home </a><a href="/how-it-works/" class="text-sm transition hover:text-white text-stone-400"> How It Works </a><a href="/materials-finishes/" class="text-sm transition hover:text-white text-stone-400"> Materials &amp; Finishes </a><a href="/quote/" class="text-sm transition hover:text-white text-stone-400"> Pricing / Quote </a><a href="/use-cases/" class="text-sm transition hover:text-white text-stone-400"> Use Cases </a><a href="/faq/" class="text-sm transition hover:text-white text-stone-400"> FAQ </a><a href="/contact/" class="text-sm transition hover:text-white text-white"> Contact </a> </nav> <div class="hidden md:block"> <a href="/quote/#quote-form" class="btn-primary"> Upload Your File </a> </div> <button type="button" class="btn-subtle md:hidden" aria-expanded="false" aria-controls="mobile-menu" data-menu-button>
+Menu
+</button> </div>  </div> <div id="mobile-menu" class="hidden border-t border-white/10 md:hidden" data-mobile-menu> <div class="container-shell">  <nav class="flex flex-col gap-4 py-5" aria-label="Mobile navigation"> <a href="/" class="text-sm transition hover:text-white text-stone-400"> Home </a><a href="/how-it-works/" class="text-sm transition hover:text-white text-stone-400"> How It Works </a><a href="/materials-finishes/" class="text-sm transition hover:text-white text-stone-400"> Materials &amp; Finishes </a><a href="/quote/" class="text-sm transition hover:text-white text-stone-400"> Pricing / Quote </a><a href="/use-cases/" class="text-sm transition hover:text-white text-stone-400"> Use Cases </a><a href="/faq/" class="text-sm transition hover:text-white text-stone-400"> FAQ </a><a href="/contact/" class="text-sm transition hover:text-white text-white"> Contact </a> <a href="/quote/#quote-form" class="btn-primary mt-2 w-full"> 
+Upload Your File
+ </a> </nav>  </div> </div> </header> <script>
+  const header = document.querySelector("[data-site-header]");
+  const menuButton = header?.querySelector("[data-menu-button]");
+  const mobileMenu = document.querySelector("[data-mobile-menu]");
+
+  menuButton?.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+    menuButton.setAttribute("aria-expanded", String(!isOpen));
+    mobileMenu?.classList.toggle("hidden", isOpen);
+  });
+</script> <main>  <section class="border-b border-white/10"> <div class="container-shell">  <div class="grid gap-8 py-16 lg:grid-cols-[1.3fr_0.7fr] lg:items-end lg:py-20"> <div class="space-y-5"> <p class="eyebrow">Contact</p> <h1 class="max-w-4xl text-4xl font-semibold text-white sm:text-5xl">Reach out with a file, a sketch, or just a question.</h1> <p class="max-w-3xl text-base leading-7 text-stone-300 sm:text-lg">Technical and non-technical customers are both welcome. If you know exactly what you need, great. If you only know the problem you need to solve, that is still enough to start.</p> </div> <div class="flex flex-wrap gap-3 lg:justify-end"> <a href="/quote/#quote-form" class="btn-primary"> Upload Your File </a> <a href="mailto:hello@forgefront3d.example" class="btn-secondary"> Email Directly </a> </div> </div>  </div> </section> <section class="section-shell"> <div class="container-shell">  <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start"> <div class="panel p-6 sm:p-8" data-contact-widget> <!-- Integration note: connect this form to a real email or CRM workflow before launch. --> <form class="space-y-5" data-contact-form> <div class="grid gap-5 sm:grid-cols-2"> <div> <label class="field-label" for="contact-name">Name</label> <input class="field-input" id="contact-name" name="name" type="text" autocomplete="name" required> </div> <div> <label class="field-label" for="contact-email">Email</label> <input class="field-input" id="contact-email" name="email" type="email" autocomplete="email" required> </div> </div> <div class="grid gap-5 sm:grid-cols-2"> <div> <label class="field-label" for="contact-phone">Phone <span class="text-stone-500">(optional)</span></label> <input class="field-input" id="contact-phone" name="phone" type="tel" autocomplete="tel"> </div> <div> <label class="field-label" for="contact-topic">What do you need help with?</label> <select class="field-input" id="contact-topic" name="topic" required> <option value="">Choose a topic</option> <option value="quote">I need a quote</option> <option value="replacement">I need a replacement part</option> <option value="prototype">I need a prototype</option> <option value="design-help">I do not have a 3D file yet</option> <option value="other">Something else</option> </select> </div> </div> <div> <label class="field-label" for="contact-message">Message</label> <textarea class="field-input min-h-40" id="contact-message" name="message" placeholder="Tell us about the part, project, or problem you are trying to solve. Non-technical descriptions are welcome." required></textarea> </div> <button class="btn-primary w-full" type="submit">Send Message</button> </form> <div class="space-y-4" data-contact-success hidden tabindex="-1"> <div class="inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
+Contact form demo complete
+</div> <h3 class="text-2xl font-semibold text-white">Thanks. Your message has been captured in the demo UI.</h3> <p class="text-sm leading-7 text-stone-300">
+Wire this form to your preferred form backend or inbox workflow before going live.
+</p> <button class="btn-secondary" type="button" data-contact-reset>Send another message</button> </div> </div> <script>
+  const bindContactWidgets = () => {
+    document.querySelectorAll("[data-contact-widget]").forEach((widget) => {
+      if (widget.dataset.bound === "true") return;
+      widget.dataset.bound = "true";
+
+      const form = widget.querySelector("[data-contact-form]");
+      const success = widget.querySelector("[data-contact-success]");
+      const resetButton = widget.querySelector("[data-contact-reset]");
+
+      form?.addEventListener("submit", (event) => {
+        if (!form.reportValidity()) return;
+        event.preventDefault();
+        form.hidden = true;
+        success.hidden = false;
+        form.reset();
+        success.focus();
+      });
+
+      resetButton?.addEventListener("click", () => {
+        success.hidden = true;
+        form.hidden = false;
+        form.querySelector("input, select, textarea")?.focus();
+      });
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindContactWidgets);
+  } else {
+    bindContactWidgets();
+  }
+</script> <div class="space-y-5"> <article class="panel-soft p-6 sm:p-8"> <p class="eyebrow">Direct Contact</p> <div class="mt-5 space-y-4 text-sm leading-7 text-stone-300"> <p>
+Email:
+<a class="ml-2 text-white transition hover:text-amber-300" href="mailto:hello@forgefront3d.example"> hello@forgefront3d.example </a> </p> <p>
+Phone or WhatsApp placeholder:
+<a class="ml-2 text-white transition hover:text-amber-300" href="tel:5550103040"> (555) 010-3040 </a> </p> <p>Hours: Monday-Friday, 9:00 AM-6:00 PM</p> <p>Typical quote replies within 1 business day</p> </div> </article> <article class="panel-soft p-6 sm:p-8"> <p class="eyebrow">Service Area</p> <h2 class="mt-4 text-2xl font-semibold text-white">Local service area and pickup block</h2> <p class="mt-4 text-sm leading-7 text-stone-300">
+Replace this section with the actual city, neighborhood, or delivery area served by
+              the business. This is also the place to mention whether pickup is by appointment only.
+</p> <p class="mt-4 rounded-2xl border border-dashed border-white/15 bg-stone-900/50 px-4 py-6 text-sm text-stone-400">
+Replace with a local map embed, simple service area graphic, or business pickup
+              instructions.
+</p> <p class="mt-4 text-sm text-stone-400">[Replace with business pickup address or service area]</p> </article> <article class="panel-soft p-6 sm:p-8"> <p class="eyebrow">Best For</p> <p class="mt-4 text-sm leading-7 text-stone-300">
+Use the contact page for custom jobs, pre-quote questions, printability questions, or
+              cases where you do not have a clean upload-ready file yet.
+</p> </article> </div> </div>  </div> </section>  </main> <footer class="border-t border-white/10 bg-black/20"> <div class="container-shell">  <div class="grid gap-10 py-14 lg:grid-cols-[1.2fr_0.8fr_0.7fr]"> <div class="space-y-4"> <p class="text-lg font-semibold text-white">Forgefront 3D</p> <p class="max-w-md text-sm leading-7 text-stone-400">
+Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and small
+          batches. Built for customers who want clear answers and a real quote without enterprise
+          complexity.
+</p> <p class="text-xs text-stone-500">
+Replace contact details, testimonials, and gallery photos with real business assets before
+          launch.
+</p> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">Pages</p> <ul class="mt-5 space-y-3 text-sm text-stone-300"> <li> <a class="transition hover:text-white" href="/"> Home </a> </li><li> <a class="transition hover:text-white" href="/how-it-works/"> How It Works </a> </li><li> <a class="transition hover:text-white" href="/materials-finishes/"> Materials &amp; Finishes </a> </li><li> <a class="transition hover:text-white" href="/quote/"> Pricing / Quote </a> </li><li> <a class="transition hover:text-white" href="/use-cases/"> Use Cases </a> </li><li> <a class="transition hover:text-white" href="/faq/"> FAQ </a> </li><li> <a class="transition hover:text-white" href="/contact/"> Contact </a> </li> <li> <a class="transition hover:text-white" href="/privacy-policy/">
+Privacy Policy
+</a> </li> <li> <a class="transition hover:text-white" href="/terms-of-service/">
+Terms of Service
+</a> </li> </ul> </div> <div> <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">Contact</p> <div class="mt-5 space-y-3 text-sm text-stone-300"> <p> <a class="transition hover:text-white" href="mailto:hello@forgefront3d.example"> hello@forgefront3d.example </a> </p> <p> <a class="transition hover:text-white" href="tel:5550103040"> (555) 010-3040 </a> </p> <p>Monday-Friday, 9:00 AM-6:00 PM</p> <p class="text-stone-500">Typical quote replies within 1 business day</p> </div> </div> </div> <div class="border-t border-white/10 py-5 text-xs text-stone-500"> <p>&copy; 2026 Forgefront 3D. All rights reserved.</p> </div>  </div> </footer> </body></html>

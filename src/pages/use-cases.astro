@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import Container from "../components/Container.astro";
+import PageIntro from "../components/PageIntro.astro";
+import { detailedUseCases } from "../data/site";
+---
+
+<BaseLayout
+  title="Use Cases"
+  description="See how custom 3D printing fits replacement parts, prototypes, hobby builds, cosplay pieces, and small batch business parts."
+  pathname="/use-cases/"
+>
+  <PageIntro
+    eyebrow="Use Cases"
+    title="3D printing is most useful when the job is specific."
+    description="This service is built for practical low-volume work: parts you cannot buy easily, prototypes you need quickly, and custom jobs that do not belong in a giant enterprise workflow."
+    primaryHref="/quote/#quote-form"
+    primaryLabel="Request A Quote"
+    secondaryHref="/contact/"
+    secondaryLabel="Discuss A Custom Job"
+  />
+
+  <section class="section-shell">
+    <Container>
+      <div class="space-y-6">
+        {detailedUseCases.map((item) => (
+          <article class="panel grid gap-8 p-6 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div class="space-y-4">
+              <p class="eyebrow">{item.title}</p>
+              <h2 class="text-3xl font-semibold text-white">{item.title}</h2>
+              <p class="text-sm leading-7 text-stone-300">{item.description}</p>
+            </div>
+            <div>
+              <ul class="space-y-3 text-sm leading-7 text-stone-300">
+                {item.bullets.map((bullet) => (
+                  <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">{bullet}</li>
+                ))}
+              </ul>
+              <div class="mt-6">
+                <ButtonLink href="/quote/#quote-form" variant="secondary">Request A Quote For This Type Of Job</ButtonLink>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

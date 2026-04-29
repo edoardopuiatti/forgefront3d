@@ -1,0 +1,27 @@
+---
+import { materials } from "../data/site";
+
+interface Props {
+  material: (typeof materials)[number];
+}
+
+const { material } = Astro.props;
+---
+
+<article class="panel-soft p-6">
+  <div class="flex items-start justify-between gap-4">
+    <h3 class="text-xl font-semibold text-white">{material.name}</h3>
+    <span class="badge">{material.affordability}</span>
+  </div>
+  <p class="mt-4 text-sm leading-6 text-stone-300">{material.quickDescription}</p>
+  <dl class="mt-6 space-y-3 text-sm">
+    <div>
+      <dt class="text-stone-500">Best for</dt>
+      <dd class="mt-1 text-stone-200">{material.bestUse}</dd>
+    </div>
+    <div>
+      <dt class="text-stone-500">Durability</dt>
+      <dd class="mt-1 text-stone-200">{material.durability}</dd>
+    </div>
+  </dl>
+</article>
