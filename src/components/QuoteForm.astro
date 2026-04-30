@@ -191,6 +191,7 @@ const copy = isCs
           />
         </label>
         <p class="field-help">{copy.fileFeedback}</p>
+        <div data-selected-files class="mt-4 space-y-2"></div>
       </div>
 
       <div class="grid gap-5 sm:grid-cols-2">
@@ -273,3 +274,54 @@ const copy = isCs
     </form>
   </div>
 </div>
+
+<script is:inline>
+  const bindFileManagers = () => {
+    const fileInput = document.querySelector('input[name="projectFiles"]');
+    const selectedFilesDiv = document.querySelector("[data-selected-files]");
+    let selectedFiles = [];
+
+    const updateFileList = () => {
+      selectedFilesDiv.innerHTML = "";
+      selectedFiles.forEach((file, index) => {
+        const fileDiv = document.createElement("div");
+        fileDiv.className = "flex items-center justify-between bg-stone-800 rounded-lg px-3 py-2";
+        fileDiv.innerHTML = `
+          <span class="text-sm text-stone-300 truncate">${file.name}</span>
+          <button type="button" class="text-stone-400 hover:text-red-400 ml-2" data-remove="${index}">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        `;
+        selectedFilesDiv.appendChild(fileDiv);
+      });
+
+      // Update the input
+      const dt = new DataTransfer();
+      selectedFiles.forEach(file => dt.items.add(file));
+      fileInput.files = dt.files;
+    };
+
+    fileInput?.addEventListener("change", () => {
+      const newFiles = Array.from(fileInput.files);
+      selectedFiles = [...selectedFiles, ...newFiles];
+      updateFileList();
+    });
+
+    selectedFilesDiv?.addEventListener("click", (event) => {
+      const removeBtn = event.target.closest("[data-remove]");
+      if (removeBtn) {
+        const index = parseInt(removeBtn.dataset.remove);
+        selectedFiles.splice(index, 1);
+        updateFileList();
+      }
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindFileManagers);
+  } else {
+    bindFileManagers();
+  }
+</script>
