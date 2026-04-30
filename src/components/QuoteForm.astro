@@ -273,6 +273,7 @@ const copy = isCs
       const success = widget.querySelector("[data-quote-success]");
       const resetButton = widget.querySelector("[data-reset-form]");
       const submitButton = widget.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.textContent;
 
       form?.addEventListener("submit", async (event) => {
         if (!form.reportValidity()) return;
@@ -294,7 +295,7 @@ const copy = isCs
           if (response.status === 302) {
             // Success - Formspree redirects on success
             submitButton.disabled = false;
-            submitButton.textContent = copy.submit;
+            submitButton.textContent = originalButtonText;
             form.hidden = true;
             success.hidden = false;
             form.reset();
@@ -304,7 +305,7 @@ const copy = isCs
             if (result.next) {
               // Success
               submitButton.disabled = false;
-              submitButton.textContent = copy.submit;
+              submitButton.textContent = originalButtonText;
               form.hidden = true;
               success.hidden = false;
               form.reset();
@@ -326,7 +327,7 @@ const copy = isCs
         } catch (error) {
           console.error(error);
           submitButton.disabled = false;
-          submitButton.textContent = copy.submit;
+          submitButton.textContent = originalButtonText;
           alert(`Unable to submit your quote request: ${error.message}. Please try again later.`);
         }
       });
@@ -335,7 +336,7 @@ const copy = isCs
         success.hidden = true;
         form.hidden = false;
         submitButton.disabled = false;
-        submitButton.textContent = copy.submit;
+        submitButton.textContent = originalButtonText;
         form.querySelector("input, select, textarea")?.focus();
       });
     });
