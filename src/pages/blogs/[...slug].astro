@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const postModules = import.meta.glob("../../../blogs/*.md");
+const postModules = import.meta.glob("../../blogs/*.md");
 const posts = await Promise.all(Object.values(postModules).map(fn => fn()));
 const post = posts.find(p => p.file.split('/').pop().replace('.md', '') === slug);
 const { Content } = await post.render();
