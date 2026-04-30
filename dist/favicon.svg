@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
-  <title id="title">Forgefront 3D favicon</title>
-  <desc id="desc">A simple industrial cube icon.</desc>
-  <rect width="64" height="64" rx="16" fill="#111315" />
-  <path d="M32 10 49 20v24L32 54 15 44V20l17-10Z" fill="none" stroke="#f59e0b" stroke-width="3" />
-  <path d="M32 10v24m17-14-17 14-17-14m17 14v20" fill="none" stroke="#f2f2f1" stroke-width="3" />
-</svg>
