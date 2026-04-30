@@ -12,8 +12,9 @@
     <path d="M938 112 1124 222v214L938 546 752 436V222l186-110Z" fill="none" stroke="#f59e0b" stroke-width="8" />
     <path d="M938 112v214m186-104-186 104-186-104m186 104v220" fill="none" stroke="#ffffff" stroke-width="8" />
   </g>
-  <text x="88" y="220" fill="#f59e0b" font-family="Segoe UI, sans-serif" font-size="32" letter-spacing="6">FORGEFRONT 3D</text>
-  <text x="88" y="320" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="72" font-weight="700">Custom 3D printed parts.</text>
-  <text x="88" y="398" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="72" font-weight="700">Quoted by a real person.</text>
-  <text x="88" y="488" fill="#d6d3d1" font-family="Segoe UI, sans-serif" font-size="32">One-offs, prototypes, replacement parts, and small batches.</text>
+  <text x="88" y="210" fill="#f59e0b" font-family="Segoe UI, sans-serif" font-size="32" letter-spacing="6">FORGEFRONT 3D</text>
+  <text x="88" y="305" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="68" font-weight="700">Custom 3D printed parts.</text>
+  <text x="88" y="380" fill="#ffffff" font-family="Segoe UI, sans-serif" font-size="68" font-weight="700">PLA, PETG, and ASA.</text>
+  <text x="88" y="455" fill="#d6d3d1" font-family="Segoe UI, sans-serif" font-size="30">Prague 2 pickup or shipping. Human-reviewed quotes.</text>
+  <text x="88" y="520" fill="#d6d3d1" font-family="Segoe UI, sans-serif" font-size="30">forgefront3d.com</text>
 </svg>

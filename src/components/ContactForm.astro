@@ -1,58 +1,100 @@
+---
+interface Props {
+  locale?: "en" | "cs";
+}
+
+const { locale = "en" } = Astro.props;
+const isCs = locale === "cs";
+const copy = isCs
+  ? {
+      name: "Jméno",
+      email: "E-mail",
+      topic: "S čím potřebujete pomoct?",
+      topicPlaceholder: "Vyberte téma",
+      options: [
+        ["quote", "Potřebuji cenovou nabídku"],
+        ["replacement", "Potřebuji náhradní díl"],
+        ["prototype", "Potřebuji prototyp"],
+        ["design-help", "Ještě nemám 3D soubor"],
+        ["other", "Něco jiného"],
+      ],
+      message: "Zpráva",
+      messagePlaceholder:
+        "Popište díl, projekt nebo problém, který potřebujete vyřešit. Netechnický popis je v pořádku.",
+      submit: "Odeslat zprávu",
+      successBadge: "Kontaktní formulář zachycen v demo rozhraní",
+      successTitle: "Děkujeme. Vaše zpráva byla zachycena v demo stavu.",
+      successBody: "Před spuštěním propojte formulář s reálnou e-mailovou schránkou nebo CRM workflow.",
+      reset: "Poslat další zprávu",
+    }
+  : {
+      name: "Name",
+      email: "Email",
+      topic: "What do you need help with?",
+      topicPlaceholder: "Choose a topic",
+      options: [
+        ["quote", "I need a quote"],
+        ["replacement", "I need a replacement part"],
+        ["prototype", "I need a prototype"],
+        ["design-help", "I do not have a 3D file yet"],
+        ["other", "Something else"],
+      ],
+      message: "Message",
+      messagePlaceholder:
+        "Tell us about the part, project, or problem you are trying to solve. Non-technical descriptions are welcome.",
+      submit: "Send Message",
+      successBadge: "Contact form demo complete",
+      successTitle: "Thanks. Your message has been captured in the demo UI.",
+      successBody: "Wire this form to your preferred form backend or inbox workflow before going live.",
+      reset: "Send another message",
+    };
+---
+
 <div class="panel p-6 sm:p-8" data-contact-widget>
   <!-- Integration note: connect this form to a real email or CRM workflow before launch. -->
   <form class="space-y-5" data-contact-form>
     <div class="grid gap-5 sm:grid-cols-2">
       <div>
-        <label class="field-label" for="contact-name">Name</label>
+        <label class="field-label" for="contact-name">{copy.name}</label>
         <input class="field-input" id="contact-name" name="name" type="text" autocomplete="name" required />
       </div>
       <div>
-        <label class="field-label" for="contact-email">Email</label>
+        <label class="field-label" for="contact-email">{copy.email}</label>
         <input class="field-input" id="contact-email" name="email" type="email" autocomplete="email" required />
       </div>
     </div>
 
-    <div class="grid gap-5 sm:grid-cols-2">
-      <div>
-        <label class="field-label" for="contact-phone">Phone <span class="text-stone-500">(optional)</span></label>
-        <input class="field-input" id="contact-phone" name="phone" type="tel" autocomplete="tel" />
-      </div>
-      <div>
-        <label class="field-label" for="contact-topic">What do you need help with?</label>
-        <select class="field-input" id="contact-topic" name="topic" required>
-          <option value="">Choose a topic</option>
-          <option value="quote">I need a quote</option>
-          <option value="replacement">I need a replacement part</option>
-          <option value="prototype">I need a prototype</option>
-          <option value="design-help">I do not have a 3D file yet</option>
-          <option value="other">Something else</option>
-        </select>
-      </div>
+    <div>
+      <label class="field-label" for="contact-topic">{copy.topic}</label>
+      <select class="field-input" id="contact-topic" name="topic" required>
+        <option value="">{copy.topicPlaceholder}</option>
+        {copy.options.map(([value, label]) => (
+          <option value={value}>{label}</option>
+        ))}
+      </select>
     </div>
 
     <div>
-      <label class="field-label" for="contact-message">Message</label>
+      <label class="field-label" for="contact-message">{copy.message}</label>
       <textarea
         class="field-input min-h-40"
         id="contact-message"
         name="message"
-        placeholder="Tell us about the part, project, or problem you are trying to solve. Non-technical descriptions are welcome."
+        placeholder={copy.messagePlaceholder}
         required
       ></textarea>
     </div>
 
-    <button class="btn-primary w-full" type="submit">Send Message</button>
+    <button class="btn-primary w-full" type="submit">{copy.submit}</button>
   </form>
 
   <div class="space-y-4" data-contact-success hidden tabindex="-1">
     <div class="inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
-      Contact form demo complete
+      {copy.successBadge}
     </div>
-    <h3 class="text-2xl font-semibold text-white">Thanks. Your message has been captured in the demo UI.</h3>
-    <p class="text-sm leading-7 text-stone-300">
-      Wire this form to your preferred form backend or inbox workflow before going live.
-    </p>
-    <button class="btn-secondary" type="button" data-contact-reset>Send another message</button>
+    <h3 class="text-2xl font-semibold text-white">{copy.successTitle}</h3>
+    <p class="text-sm leading-7 text-stone-300">{copy.successBody}</p>
+    <button class="btn-secondary" type="button" data-contact-reset>{copy.reset}</button>
   </div>
 </div>
 

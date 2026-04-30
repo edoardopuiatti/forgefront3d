@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import PageIntro from "../../components/PageIntro.astro";
+---
+
+<BaseLayout
+  title="Obchodní podmínky"
+  description="Výchozí návrh obchodních podmínek pro malou službu zakázkového 3D tisku."
+  pathname="/cs/terms-of-service/"
+  locale="cs"
+>
+  <PageIntro
+    eyebrow="Právní informace"
+    title="Obchodní podmínky"
+    description="Výchozí text obchodních podmínek pro malý 3D tisk na zakázku. Před spuštěním je potřeba ho přizpůsobit reálné firmě, jurisdikci, reklamačním pravidlům a obchodnímu procesu."
+  />
+
+  <section class="section-shell">
+    <Container>
+      <article class="legal-copy max-w-4xl">
+        <section>
+          <p>Účinnost od: 30. dubna 2026</p>
+          <p>
+            Tyto obchodní podmínky upravují používání tohoto webu a poskytování služeb zakázkového
+            3D tisku společností <strong>[Doplňte právní název firmy]</strong>. Používáním webu,
+            odesláním poptávky nebo potvrzením objednávky s nimi souhlasíte.
+          </p>
+        </section>
+
+        <section>
+          <h2>Služby</h2>
+          <p>
+            Firma poskytuje zakázkový 3D tisk prototypů, náhradních dílů, hobby projektů, malých sérií a souvisejících zakázek v rozsahu technických možností, dostupných materiálů a vhodnosti zadání.
+          </p>
+        </section>
+
+        <section>
+          <h2>Nabídky a objednávky</h2>
+          <ul>
+            <li>Veškeré ceny jsou sdělovány formou individuální nabídky, pokud není výslovně uvedeno jinak.</li>
+            <li>Nabídka může záviset na kontrole souboru, volbě materiálu, množství, požadovaném vzhledu a způsobu doručení.</li>
+            <li>Nabídka se stává závaznou objednávkou až po potvrzení ze strany firmy a splnění dohodnutých platebních podmínek.</li>
+            <li>Uvedené termíny jsou orientační, pokud není výslovně garantováno jinak.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Odpovědnost zákazníka</h2>
+          <ul>
+            <li>Zákazník odpovídá za správnost nahraných souborů, rozměrů a zadání.</li>
+            <li>Zákazník odpovídá za to, že má právo předložit jakýkoli model, výkres, logo nebo návrh k výrobě.</li>
+            <li>Firma může odmítnout zakázky, které se jeví jako nebezpečné, protiprávní, porušující práva třetích stran nebo technicky nevhodné.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Výrobní odchylky a očekávání</h2>
+          <p>
+            3D tisk je výrobní proces s praktickými tolerancemi a viditelnými stopami procesu.
+            V závislosti na geometrii, materiálu a požadovaném vzhledu se mohou objevit vrstvy,
+            stopy po podpěrách, drobné povrchové odchylky a přiměřená rozměrová tolerance.
+          </p>
+          <p>
+            Zákazník by měl před zahájením výroby označit všechny kritické rozměry, pevnostní požadavky nebo nároky na vzhled.
+          </p>
+        </section>
+
+        <section>
+          <h2>Omezení použití</h2>
+          <p>
+            Vytištěné díly nemusí být vhodné pro každé použití. Pokud není výslovně dohodnuto jinak,
+            nejsou určeny pro zdravotnické, letecké, life-safety ani jiné vysoce odpovědnostní aplikace.
+          </p>
+          <p>
+            Placeholder pro právní revizi: <strong>[Doplňte finální omezení nebo zakázané způsoby použití]</strong>.
+          </p>
+        </section>
+
+        <section>
+          <h2>Platba</h2>
+          <p>
+            Platební podmínky, případné zálohy a akceptované platební metody by měly být uvedeny zde.
+            Pokud je vyžadována záloha, platba předem nebo fakturace, je potřeba to jasně doplnit před spuštěním webu.
+          </p>
+        </section>
+
+        <section>
+          <h2>Změny, storna a přetisky</h2>
+          <ul>
+            <li>Po zahájení tisku nebo přípravy materiálu nemusí být možné objednávku stornovat.</li>
+            <li>Úpravy návrhu po schválení nabídky mohou vyžadovat novou cenu i nový termín.</li>
+            <li>Podmínky přetisku, vrácení nebo reklamace je potřeba před spuštěním webu doplnit jasně a konkrétně.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Doručení a vyzvednutí</h2>
+          <p>
+            Termíny doručení jsou orientační, pokud není výslovně uvedeno jinak. Je vhodné doplnit,
+            kdy přechází riziko škody a jak se liší pravidla pro zaslání a osobní vyzvednutí.
+          </p>
+        </section>
+
+        <section>
+          <h2>Duševní vlastnictví</h2>
+          <p>
+            Zákazník si ponechává práva ke svým návrhům s výjimkou oprávnění nutného pro kontrolu,
+            nacenění, výrobu, zabalení a doručení zakázky. Firma si ponechává práva ke svému webu,
+            značce a interním výrobním postupům.
+          </p>
+        </section>
+
+        <section>
+          <h2>Omezení odpovědnosti</h2>
+          <p>
+            V maximálním rozsahu povoleném právem by firma měla omezit odpovědnost za nepřímé,
+            následné a zvláštní škody. Limity a formulace odpovědnosti je vhodné před spuštěním zkontrolovat s právníkem.
+          </p>
+        </section>
+      </article>
+    </Container>
+  </section>
+</BaseLayout>

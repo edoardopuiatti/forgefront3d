@@ -9,7 +9,7 @@ import { materials } from "../data/site";
 
 <BaseLayout
   title="Materials & Finishes"
-  description="Compare PLA, PETG, ABS, and resin for strength, finish, use case, and practical 3D print expectations."
+  description="Compare PLA, PETG, and ASA for strength, finish, use case, and practical 3D print expectations."
   pathname="/materials-finishes/"
 >
   <PageIntro
@@ -28,7 +28,7 @@ import { materials } from "../data/site";
         title="Common material options"
         description="Availability may vary depending on current stock, part geometry, and whether a specific material is a good match for the job."
       />
-      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+      <div class="mt-10 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
         {materials.map((material) => (
           <article class="panel p-6 sm:p-8">
             <div class="flex flex-wrap items-start justify-between gap-4">
@@ -71,7 +71,7 @@ import { materials } from "../data/site";
           <SectionHeading
             eyebrow="Color Options"
             title="Color can often be chosen, but stock varies."
-            description="Common neutral colors such as black, white, and gray are usually the easiest place to start. Specialty colors may depend on material availability and should be confirmed at quoting time."
+            description="Common neutral colors such as black, white, and gray are usually the easiest place to start. Specialty colors may depend on whether the job is being printed in PLA, PETG, or ASA and should be confirmed at quoting time."
           />
         </article>
         <article class="panel-soft p-6 sm:p-8">
@@ -107,9 +107,8 @@ import { materials } from "../data/site";
           <p class="eyebrow">Need A Recommendation?</p>
           <h2 class="mt-4 text-3xl font-semibold text-white">Describe the job and the material can be recommended for you.</h2>
           <p class="mt-4 text-sm leading-7 text-stone-300">
-            If you know what the part needs to do but do not know whether PLA, PETG, ABS, or resin
-            makes sense, that is normal. The quote form includes an option to request a
-            recommendation.
+            If you know what the part needs to do but do not know whether PLA, PETG, or ASA makes
+            sense, that is normal. The quote form includes an option to request a recommendation.
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
             <ButtonLink href="/quote/#quote-form">Upload Your File</ButtonLink>

@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
+import Container from "../../components/Container.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import { fileTypesCs, stepsCs } from "../../data/site-cs";
+---
+
+<BaseLayout
+  title="Jak to funguje"
+  description="Podívejte se, jak funguje proces poptávky, kontroly, přípravy tisku, výroby a zaslání nebo vyzvednutí v Praze 2."
+  pathname="/cs/how-it-works/"
+  locale="cs"
+>
+  <PageIntro
+    eyebrow="Jak to funguje"
+    title="Jednoduchý proces od nahrání souboru po hotový díl."
+    description="Ať už objednáváte jeden náhradní díl nebo krátkou sérii prototypů, cílem je mít vše jasné hned od prvního kontaktu."
+    primaryHref="/cs/quote/#quote-form"
+    primaryLabel="Nahrát soubor"
+    secondaryHref="/cs/contact/"
+    secondaryLabel="Položit dotaz"
+  />
+
+  <section class="section-shell">
+    <Container>
+      <SectionHeading
+        title="Cesta zákazníka"
+        description="Ne každá zakázka potřebuje komplikovaný workflow. Tohle můžete očekávat, když pošlete poptávku."
+      />
+      <div class="mt-10 space-y-5">
+        {stepsCs.map((step, index) => (
+          <article class="panel grid gap-5 p-6 lg:grid-cols-[120px_1fr] lg:p-8">
+            <div>
+              <span class="inline-flex rounded-full border border-amber-300/30 bg-amber-300/10 px-4 py-2 text-sm font-semibold text-amber-300">
+                Krok 0{index + 1}
+              </span>
+            </div>
+            <div>
+              <h2 class="text-2xl font-semibold text-white">{step.title}</h2>
+              <p class="mt-4 max-w-3xl text-sm leading-7 text-stone-300">{step.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell border-y border-white/10 bg-black/20">
+    <Container>
+      <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div>
+          <SectionHeading
+            eyebrow="Co poslat"
+            title="Čím víc kontextu pošlete, tím lepší bude nabídka."
+            description="Ideální je čistý soubor k tisku, ale rozhodně to není jediný způsob, jak začít."
+          />
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <article class="panel-soft p-6">
+            <h3 class="text-lg font-semibold text-white">Nejlepší varianta</h3>
+            <p class="mt-3 text-sm leading-7 text-stone-300">
+              Soubor připravený k tisku ve formátu {fileTypesCs.join(", ")}, plus počet kusů,
+              představa o materiálu, očekávaný vzhled a případný termín.
+            </p>
+          </article>
+          <article class="panel-soft p-6">
+            <h3 class="text-lg font-semibold text-white">Pořád v pořádku i bez modelu</h3>
+            <p class="mt-3 text-sm leading-7 text-stone-300">
+              Náčrt, referenční díl, orientační rozměry, fotky nebo srozumitelný popis problému, který potřebujete vyřešit.
+            </p>
+          </article>
+          <article class="panel-soft p-6">
+            <h3 class="text-lg font-semibold text-white">Užitečné technické poznámky</h3>
+            <p class="mt-3 text-sm leading-7 text-stone-300">
+              Uveďte, jestli díl potřebuje pevnost, odolnost vůči počasí nebo čistý vzhled. Kritické rozměry jsou důležité.
+            </p>
+          </article>
+          <article class="panel-soft p-6">
+            <h3 class="text-lg font-semibold text-white">Užitečné netechnické poznámky</h3>
+            <p class="mt-3 text-sm leading-7 text-stone-300">
+              Napište, k čemu díl slouží, kde bude použitý a co je nejdůležitější: vzhled, rychlost, odolnost nebo rozpočet.
+            </p>
+          </article>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell">
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-2">
+        <article class="panel p-6 sm:p-8">
+          <p class="eyebrow">Když soubor potřebuje úpravu</p>
+          <h2 class="mt-4 text-3xl font-semibold text-white">Drobné problémy zachytíme ještě před výrobou.</h2>
+          <p class="mt-4 text-sm leading-7 text-stone-300">
+            Pokud má model příliš tenké stěny, slabé prvky, problém s měřítkem nebo jinou zjevnou
+            potíž s tisknutelností, dozvíte se to ještě před tiskem. Cílem je předejít zbytečným
+            neúspěchům a nastavit správné očekávání.
+          </p>
+          <p class="mt-4 text-sm leading-7 text-stone-300">
+            Základní kontrola je součástí nacenění. Pokud zakázka vyžaduje rozsáhlejší modelování,
+            je potřeba to domluvit zvlášť před zahájením výroby.
+          </p>
+        </article>
+
+        <article class="panel p-6 sm:p-8">
+          <p class="eyebrow">Pro první objednávku</p>
+          <h2 class="mt-4 text-3xl font-semibold text-white">Nemusíte znát odborné termíny, abyste mohli službu využít.</h2>
+          <p class="mt-4 text-sm leading-7 text-stone-300">
+            Mnoho zákazníků přichází s praktickým problémem, ne s technickým zadáním. Pokud je to i
+            váš případ, napište, co víte, a ptejte se. Materiál, očekávaný vzhled i vhodnost zakázky
+            se dají vysvětlit jednoduše.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <ButtonLink href="/cs/quote/#quote-form">Vyžádat nabídku</ButtonLink>
+            <ButtonLink href="/cs/contact/" variant="secondary">Kontaktovat dílnu</ButtonLink>
+          </div>
+        </article>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

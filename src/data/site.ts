@@ -2,13 +2,11 @@ export const site = {
   name: "Forgefront 3D",
   title: "Forgefront 3D | Custom 3D Printing for Parts, Prototypes, and Small Batches",
   description:
-    "Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and short-run production. Upload a file or request a quote.",
-  url: "https://www.forgefront3d.example",
-  email: "hello@forgefront3d.example",
-  phone: "(555) 010-3040",
-  whatsapp: "(555) 010-3040",
+    "Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and short-run production in Prague. Upload a file and request a quote.",
+  url: "https://forgefront3d.com",
+  email: "forgefront3d@gmail.com",
   responseTime: "Typical quote replies within 1 business day",
-  addressLine: "[Replace with business pickup address or service area]",
+  addressLine: "Pickup available in Prague 2 by appointment.",
   hours: "Monday-Friday, 9:00 AM-6:00 PM",
 };
 
@@ -27,8 +25,8 @@ export const fileTypes = ["STL", "STEP", "OBJ", "3MF"];
 export const trustBarItems = [
   "Human-reviewed quotes",
   "One-off and short-run friendly",
-  "Local pickup or shipping",
-  "Practical material guidance",
+  "Pickup in Prague 2 or shipping",
+  "PLA, PETG, and ASA available",
 ];
 
 export const steps = [
@@ -40,12 +38,12 @@ export const steps = [
   {
     title: "Receive a quote and material recommendation",
     description:
-      "Every job is reviewed by a real person. You will get pricing, lead time, and help choosing the right material or finish for the part.",
+      "Every job is reviewed by a real person. You will get pricing, lead time, and help choosing between PLA, PETG, and ASA based on the job.",
   },
   {
-    title: "We print, inspect, and arrange delivery or pickup",
+    title: "We print, inspect, and arrange delivery or Prague 2 pickup",
     description:
-      "Once approved, the job moves into print prep and production. Small parts can often move quickly, with pickup or shipping arranged when finished.",
+      "Once approved, the job moves into print prep and production. Small parts can often move quickly, with shipping or pickup by appointment in Prague 2.",
   },
 ];
 
@@ -94,24 +92,14 @@ export const materials = [
     caveats: "Great for many functional jobs when you need a balance of cost and durability.",
   },
   {
-    name: "ABS",
-    quickDescription: "More heat-tolerant and suitable for tougher functional parts when the geometry and application are a good fit.",
-    bestUse: "Functional prototypes, shop parts, warmer environments",
+    name: "ASA",
+    quickDescription: "A more weather-resistant engineering material for tougher functional parts and outdoor use.",
+    bestUse: "Outdoor parts, durable enclosures, more demanding functional pieces",
     affordability: "Mid-range",
-    durability: "Good impact and heat resistance",
-    strength: "Useful for more demanding functional parts",
+    durability: "High durability",
+    strength: "Good UV and weather resistance with strong functional performance",
     finish: "Matte finish with visible print lines",
-    caveats: "Availability may depend on part size, warp risk, and required finish quality.",
-  },
-  {
-    name: "Resin",
-    quickDescription: "Higher-detail prints for small parts, smooth surfaces, and presentation pieces.",
-    bestUse: "Miniatures, fine-detail components, display models, cosmetic prototypes",
-    affordability: "Higher cost",
-    durability: "Varies by resin type",
-    strength: "Best chosen based on detail needs rather than raw toughness",
-    finish: "Smooth detail and crisp edges",
-    caveats: "Excellent for visual detail, but not every resin part is ideal for rough use or outdoor exposure.",
+    caveats: "Useful when the part needs better outdoor stability than PLA or PETG, but it may not be necessary for every job.",
   },
 ] as const;
 
@@ -134,7 +122,7 @@ export const reasons = [
   },
   {
     title: "Personal local service",
-    description: "Local pickup can be arranged, and questions are answered by the person actually reviewing and printing the job.",
+    description: "Pickup can be arranged in Prague 2, and questions are answered by the person actually reviewing and printing the job.",
   },
   {
     title: "Help for non-technical customers",
@@ -147,7 +135,7 @@ export const galleryItems = [
   { label: "Prototype enclosure", note: "Replace with photo of prototype enclosure" },
   { label: "Replacement knob", note: "Replace with photo of replacement household part" },
   { label: "Fixture for shop use", note: "Replace with photo of printed tool or jig" },
-  { label: "Cosplay detail part", note: "Replace with photo of costume component" },
+  { label: "Cosplay armor detail", note: "Replace with photo of FDM-printed costume component" },
   { label: "Small batch spacer set", note: "Replace with photo of repeat production parts" },
 ];
 
@@ -193,7 +181,7 @@ export const faqs = [
   {
     question: "How long does printing take?",
     answer:
-      "Lead time depends on part size, quantity, material, and current queue. Straightforward small parts can often move quickly, while larger or more detailed jobs may take longer. If you have a deadline, include it with the quote request.",
+      "Lead time depends on part size, quantity, material, and current queue. Straightforward small parts can often move quickly, while larger jobs may take longer. If you have a deadline, include it with the quote request.",
   },
   {
     question: "How much does 3D printing cost?",
@@ -213,7 +201,7 @@ export const faqs = [
   {
     question: "What materials do you offer?",
     answer:
-      "Common options include PLA, PETG, ABS, and resin, depending on the part requirements and current stock. If you need something specific, ask during the quote request.",
+      "The standard material options are PLA, PETG, and ASA. If you need help choosing between them, include a short note about how the part will be used.",
   },
   {
     question: "Do you print one-off parts?",
@@ -223,7 +211,7 @@ export const faqs = [
   {
     question: "Do you ship or offer pickup?",
     answer:
-      "Both options can be arranged. Shipping and local pickup availability should be confirmed when the quote is approved.",
+      "Both options can be arranged. Shipping is available, and local pickup can be arranged in Prague 2 by appointment.",
   },
   {
     question: "What size parts can you print?",
@@ -281,11 +269,11 @@ export const detailedUseCases = [
   {
     title: "Custom gifts and cosplay parts",
     description:
-      "Props, display objects, decorative components, and costume details can all be good candidates for 3D printing, especially when the part needs a specific shape or surface detail.",
+      "Props, display objects, decorative components, and costume details can all be good candidates for FDM 3D printing when you need a specific shape quickly and affordably.",
     bullets: [
-      "Fine detail parts may be better suited to resin",
+      "Well suited to larger costume pieces, props, brackets, and armor details",
       "Large decorative prints may need joining or finishing after printing",
-      "Expect a discussion around finish level and post-processing needs",
+      "Expect a discussion around finish level, sanding, and paint prep if appearance matters",
     ],
   },
   {
@@ -307,7 +295,7 @@ export const priceFactors = [
   },
   {
     title: "Material choice",
-    description: "PLA, PETG, ABS, and resin have different costs, strengths, and print handling needs.",
+    description: "PLA, PETG, and ASA have different costs, strengths, and environmental resistance.",
   },
   {
     title: "Quantity",

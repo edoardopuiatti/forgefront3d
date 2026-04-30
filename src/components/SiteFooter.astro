@@ -1,6 +1,39 @@
 ---
 import Container from "./Container.astro";
 import { navLinks, site } from "../data/site";
+import { navLinksCs, siteCs } from "../data/site-cs";
+
+interface Props {
+  locale?: "en" | "cs";
+}
+
+const { locale = "en" } = Astro.props;
+const isCs = locale === "cs";
+const links = isCs ? navLinksCs : navLinks;
+const content = isCs
+  ? {
+      description:
+        "Rychlý a praktický 3D tisk náhradních dílů, prototypů, zakázkových dílů a malých sérií. Web je stavěný pro zákazníky, kteří chtějí jasné informace a reálnou cenovou nabídku bez zbytečné složitosti.",
+      note:
+        "Před spuštěním nahraďte ukázkové reference, galerii a právní placeholdery reálnými firemními podklady.",
+      pagesTitle: "Stránky",
+      contactTitle: "Kontakt",
+      privacy: "Zásady ochrany osobních údajů",
+      terms: "Obchodní podmínky",
+      rights: "Všechna práva vyhrazena.",
+    }
+  : {
+      description:
+        "Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and small batches. Built for customers who want clear answers and a real quote without enterprise complexity.",
+      note:
+        "Replace testimonials, gallery photos, and legal placeholders with real business assets before launch.",
+      pagesTitle: "Pages",
+      contactTitle: "Contact",
+      privacy: "Privacy Policy",
+      terms: "Terms of Service",
+      rights: "All rights reserved.",
+    };
+const legalBase = isCs ? "/cs" : "";
 ---
 
 <footer class="border-t border-white/10 bg-black/20">
@@ -9,20 +42,15 @@ import { navLinks, site } from "../data/site";
       <div class="space-y-4">
         <p class="text-lg font-semibold text-white">{site.name}</p>
         <p class="max-w-md text-sm leading-7 text-stone-400">
-          Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and small
-          batches. Built for customers who want clear answers and a real quote without enterprise
-          complexity.
+          {content.description}
         </p>
-        <p class="text-xs text-stone-500">
-          Replace contact details, testimonials, and gallery photos with real business assets before
-          launch.
-        </p>
+        <p class="text-xs text-stone-500">{content.note}</p>
       </div>
 
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">Pages</p>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">{content.pagesTitle}</p>
         <ul class="mt-5 space-y-3 text-sm text-stone-300">
-          {navLinks.map((link) => (
+          {links.map((link) => (
             <li>
               <a class="transition hover:text-white" href={link.href}>
                 {link.label}
@@ -30,39 +58,35 @@ import { navLinks, site } from "../data/site";
             </li>
           ))}
           <li>
-            <a class="transition hover:text-white" href="/privacy-policy/">
-              Privacy Policy
+            <a class="transition hover:text-white" href={`${legalBase}/privacy-policy/`}>
+              {content.privacy}
             </a>
           </li>
           <li>
-            <a class="transition hover:text-white" href="/terms-of-service/">
-              Terms of Service
+            <a class="transition hover:text-white" href={`${legalBase}/terms-of-service/`}>
+              {content.terms}
             </a>
           </li>
         </ul>
       </div>
 
       <div>
-        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">Contact</p>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">{content.contactTitle}</p>
         <div class="mt-5 space-y-3 text-sm text-stone-300">
           <p>
             <a class="transition hover:text-white" href={`mailto:${site.email}`}>
               {site.email}
             </a>
           </p>
-          <p>
-            <a class="transition hover:text-white" href={`tel:${site.phone.replace(/[^+\d]/g, "")}`}>
-              {site.phone}
-            </a>
-          </p>
-          <p>{site.hours}</p>
-          <p class="text-stone-500">{site.responseTime}</p>
+          <p>{isCs ? siteCs.addressLine : site.addressLine}</p>
+          <p>{isCs ? siteCs.hours : site.hours}</p>
+          <p class="text-stone-500">{isCs ? siteCs.responseTime : site.responseTime}</p>
         </div>
       </div>
     </div>
 
     <div class="border-t border-white/10 py-5 text-xs text-stone-500">
-      <p>&copy; {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} {site.name}. {content.rights}</p>
     </div>
   </Container>
 </footer>

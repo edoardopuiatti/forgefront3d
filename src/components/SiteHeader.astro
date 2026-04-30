@@ -2,32 +2,52 @@
 import ButtonLink from "./ButtonLink.astro";
 import Container from "./Container.astro";
 import { navLinks, site } from "../data/site";
+import { navLinksCs } from "../data/site-cs";
 
 interface Props {
   currentPath: string;
+  locale?: "en" | "cs";
 }
 
-const { currentPath } = Astro.props;
+const { currentPath, locale = "en" } = Astro.props;
+const isCs = locale === "cs";
+const links = isCs ? navLinksCs : navLinks;
+const homeHref = isCs ? "/cs/" : "/";
+const ui = isCs
+  ? {
+      tagline: "Zakázkový 3D tisk",
+      primaryCta: "Nahrát soubor",
+      menu: "Menu",
+      switchLabel: "EN",
+      switchHref: currentPath.replace(/^\/cs/, "") || "/",
+    }
+  : {
+      tagline: "Custom 3D printing service",
+      primaryCta: "Upload Your File",
+      menu: "Menu",
+      switchLabel: "CZ",
+      switchHref: `/cs${currentPath === "/" ? "/" : currentPath}`,
+    };
 
 const isActive = (href: string) =>
-  href === "/" ? currentPath === href : currentPath.startsWith(href);
+  href === "/" || href === "/cs/" ? currentPath === href : currentPath.startsWith(href);
 ---
 
 <header class="sticky top-0 z-50 border-b border-white/10 bg-stone-950/90 backdrop-blur" data-site-header>
   <Container>
     <div class="flex items-center justify-between gap-4 py-4">
-      <a href="/" class="flex items-center gap-3 text-white">
+      <a href={homeHref} class="flex items-center gap-3 text-white">
         <span class="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
           <span class="text-sm font-semibold tracking-[0.2em] text-amber-300">F3</span>
         </span>
         <span>
           <span class="block text-sm font-semibold">{site.name}</span>
-          <span class="block text-xs text-stone-400">Custom 3D printing service</span>
+          <span class="block text-xs text-stone-400">{ui.tagline}</span>
         </span>
       </a>
 
       <nav class="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
-        {navLinks.map((link) => (
+        {links.map((link) => (
           <a
             href={link.href}
             class:list={[
@@ -40,8 +60,9 @@ const isActive = (href: string) =>
         ))}
       </nav>
 
-      <div class="hidden md:block">
-        <ButtonLink href="/quote/#quote-form">Upload Your File</ButtonLink>
+      <div class="hidden items-center gap-3 md:flex">
+        <a class="btn-subtle" href={ui.switchHref}>{ui.switchLabel}</a>
+        <ButtonLink href={isCs ? "/cs/quote/#quote-form" : "/quote/#quote-form"}>{ui.primaryCta}</ButtonLink>
       </div>
 
       <button
@@ -51,7 +72,7 @@ const isActive = (href: string) =>
         aria-controls="mobile-menu"
         data-menu-button
       >
-        Menu
+        {ui.menu}
       </button>
     </div>
   </Container>
@@ -59,7 +80,7 @@ const isActive = (href: string) =>
   <div id="mobile-menu" class="hidden border-t border-white/10 md:hidden" data-mobile-menu>
     <Container>
       <nav class="flex flex-col gap-4 py-5" aria-label="Mobile navigation">
-        {navLinks.map((link) => (
+        {links.map((link) => (
           <a
             href={link.href}
             class:list={[
@@ -70,8 +91,9 @@ const isActive = (href: string) =>
             {link.label}
           </a>
         ))}
-        <ButtonLink href="/quote/#quote-form" className="mt-2 w-full">
-          Upload Your File
+        <a class="btn-subtle w-full" href={ui.switchHref}>{ui.switchLabel}</a>
+        <ButtonLink href={isCs ? "/cs/quote/#quote-form" : "/quote/#quote-form"} className="mt-2 w-full">
+          {ui.primaryCta}
         </ButtonLink>
       </nav>
     </Container>

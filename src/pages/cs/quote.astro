@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import QuoteForm from "../../components/QuoteForm.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+---
+
+<BaseLayout
+  title="Ceník a poptávka"
+  description="Nahrajte 3D soubor a vyžádejte si ruční cenovou nabídku na zakázkový tisk, prototypy a malé série."
+  pathname="/cs/quote/"
+  locale="cs"
+>
+  <PageIntro
+    eyebrow="Ceník a poptávka"
+    title="Nahrajte soubor a získejte cenovou nabídku."
+    description="Cena závisí na velikosti, materiálu, množství, složitosti, vzhledu a termínu. Tato stránka je záměrně poctivá: jde o poptávkový workflow, ne o falešný instantní kalkulátor."
+  />
+
+  <section class="section-shell">
+    <Container>
+      <QuoteForm locale="cs" />
+    </Container>
+  </section>
+
+  <section class="section-shell border-t border-white/10 bg-black/20">
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-2">
+        <article class="panel-soft p-6 sm:p-8">
+          <SectionHeading
+            eyebrow="Potřebujete nejdřív poradit?"
+            title="O nabídku můžete požádat i tehdy, když soubor ještě není finální."
+            description="Pokud model potřebuje kontrolu, rozměry ještě nejsou potvrzené nebo máte zatím jen hrubý koncept, napište to do poznámky. I tak se dá navrhnout nejlepší další krok."
+          />
+        </article>
+        <article class="panel-soft p-6 sm:p-8">
+          <SectionHeading
+            eyebrow="Volitelný průvodce"
+            title="Sem lze později přidat návod na přípravu souboru."
+            description="Rozvržení počítá s budoucím PDF nebo jednoduchou stránkou typu „Jak připravit 3D soubor pro nacenění“."
+          />
+        </article>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

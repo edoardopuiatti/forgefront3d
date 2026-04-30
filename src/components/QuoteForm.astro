@@ -3,30 +3,132 @@ import { fileTypes, materials, priceFactors } from "../data/site";
 
 interface Props {
   id?: string;
+  locale?: "en" | "cs";
 }
 
-const { id = "quote-form" } = Astro.props;
+const { id = "quote-form", locale = "en" } = Astro.props;
+const isCs = locale === "cs";
+const copy = isCs
+  ? {
+      eyebrow: "Ceník",
+      heading: "Každou poptávku kontroluje reálný člověk.",
+      intro:
+        "Cena závisí na velikosti dílu, materiálu, počtu kusů, složitosti, požadovaném vzhledu a termínu. Nahrajte soubor a popis zakázky a dostanete ručně připravenou nabídku s praktickým doporučením.",
+      fileHelp:
+        "Preferované formáty: STL, STEP, OBJ a 3MF. Pokud pro vaši zakázku není k dispozici automatická kalkulace, pošleme ruční cenovou nabídku.",
+      firstTime: "Objednáváte 3D tisk poprvé?",
+      firstTimeBody:
+        "To vůbec nevadí. Pokud si nejste jistí materiálem, rozměry nebo přípravou souboru, napište to. I krátký popis nebo přibližný termín stačí, abychom mohli začít.",
+      name: "Jméno",
+      email: "E-mail",
+      company: "Firma",
+      fileUpload: "Nahrání souboru",
+      dropzoneTitle: "Přetáhněte soubor sem nebo ho vyberte z počítače",
+      dropzoneHint: `Podporované formáty: ${fileTypes.join(", ")}. Je možné nahrát více souborů.`,
+      fileFeedback:
+        "Pokud jsou soubory příliš velké pro přiložení, napište to do poznámky a domluvíme jiný způsob předání.",
+      material: "Preferovaný materiál",
+      materialPlaceholder: "Vyberte možnost",
+      recommend: "Nejsem si jistý/á, prosím doporučit",
+      quantity: "Počet kusů",
+      dimensions: "Rozměry",
+      optional: "(volitelné)",
+      dimensionsPlaceholder: "Např. 120 x 80 x 35 mm",
+      color: "Preferovaná barva",
+      colorPlaceholder: "Černá, šedá, bílá nebo upřesnění",
+      finish: "Požadovaný vzhled",
+      finishOptions: [
+        ["", "Vyberte možnost"],
+        ["standard", "Standardní tiskový povrch"],
+        ["smoother", "Záleží mi na hladším vzhledu"],
+        ["functional", "Důležitější je funkce než vzhled"],
+        ["not-sure", "Zatím nevím"],
+      ],
+      deadline: "Potřebuji do",
+      delivery: "Doručení nebo vyzvednutí",
+      shipping: "Zaslání",
+      pickup: "Vyzvednutí v Praze 2",
+      either: "Obojí možné",
+      notes: "Poznámky k projektu",
+      notesPlaceholder:
+        "Napište, k čemu díl slouží, kde bude použitý, jestli je důležitá přesnost nebo pevnost a cokoli dalšího, co pomůže s naceněním.",
+      honesty:
+        "Upřímně: tento formulář je poptávka, ne falešný instantní kalkulátor. Pokud je potřeba ruční kontrola, ozveme se e-mailem.",
+      submit: "Odeslat poptávku",
+      successBadge: "Poptávka zachycena v demo rozhraní",
+      successTitle: "Děkujeme. Vaše poptávka byla uložena v demo stavu.",
+      successBody:
+        "Před spuštěním propojte formulář s Formspree, Netlify Forms, Resend nebo vlastním API, aby se soubory a detaily projektu opravdu odesílaly do schránky.",
+      submitAnother: "Odeslat další poptávku",
+      selectedPrefix: "Vybrané soubory",
+    }
+  : {
+      eyebrow: "Pricing",
+      heading: "Quote requests are reviewed by a real person.",
+      intro:
+        "Pricing depends on part size, material, quantity, complexity, finish, and urgency. Upload your file and the job details, and a manual quote will be sent back with any practical recommendations.",
+      fileHelp:
+        "Preferred file types: STL, STEP, OBJ, and 3MF. If instant quoting is not available for your job, a manual quote will be sent instead.",
+      firstTime: "First time ordering a print?",
+      firstTimeBody:
+        "That is fine. If you are not sure about material, dimensions, or file prep, include what you know and ask for help. A short description or rough deadline is enough to get started.",
+      name: "Name",
+      email: "Email",
+      company: "Company",
+      fileUpload: "File upload",
+      dropzoneTitle: "Drag your file here or browse from your device",
+      dropzoneHint: `Supported: ${fileTypes.join(", ")}. Multiple files are allowed.`,
+      fileFeedback:
+        "If your files are too large to attach here, mention that in the project notes and a file transfer option can be arranged.",
+      material: "Preferred material",
+      materialPlaceholder: "Select an option",
+      recommend: "Not sure, please recommend",
+      quantity: "Quantity",
+      dimensions: "Dimensions",
+      optional: "(optional)",
+      dimensionsPlaceholder: "Example: 120 x 80 x 35 mm",
+      color: "Color preference",
+      colorPlaceholder: "Black, gray, white, or specify",
+      finish: "Finish preference",
+      finishOptions: [
+        ["", "Select a finish"],
+        ["standard", "Standard print finish"],
+        ["smoother", "Smoother appearance is important"],
+        ["functional", "Function matters more than appearance"],
+        ["not-sure", "Not sure yet"],
+      ],
+      deadline: "Needed by",
+      delivery: "Delivery or pickup",
+      shipping: "Shipping",
+      pickup: "Prague 2 pickup",
+      either: "Either works",
+      notes: "Project notes",
+      notesPlaceholder:
+        "Tell us what the part does, where it will be used, whether fit matters, and anything else that would help with the quote.",
+      honesty:
+        "Honest note: this form requests a quote. It does not run a fake instant pricing engine. If a manual review is needed, you will receive a follow-up by email.",
+      submit: "Send Quote Request",
+      successBadge: "Quote request ready to send",
+      successTitle: "Thanks. Your quote request has been captured in the demo UI.",
+      successBody:
+        "Connect this form to Formspree, Netlify Forms, Resend, or a custom API route so uploaded files and project details are delivered to the business inbox in production.",
+      submitAnother: "Submit another request",
+      selectedPrefix: "Selected files",
+    };
 ---
 
 <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
   <div class="space-y-8">
     <div class="panel p-6 sm:p-8">
-      <p class="eyebrow">Pricing</p>
-      <h2 class="mt-4 text-3xl font-semibold text-white">Quote requests are reviewed by a real person.</h2>
-      <p class="mt-4 text-sm leading-7 text-stone-300">
-        Pricing depends on part size, material, quantity, complexity, finish, and urgency. Upload
-        your file and the job details, and a manual quote will be sent back with any practical
-        recommendations.
-      </p>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h2 class="mt-4 text-3xl font-semibold text-white">{copy.heading}</h2>
+      <p class="mt-4 text-sm leading-7 text-stone-300">{copy.intro}</p>
       <div class="mt-6 flex flex-wrap gap-2">
         {fileTypes.map((type) => (
           <span class="badge">{type}</span>
         ))}
       </div>
-      <p class="field-help">
-        Preferred file types: STL, STEP, OBJ, and 3MF. If instant quoting is not available for
-        your job, a manual quote will be sent instead.
-      </p>
+      <p class="field-help">{copy.fileHelp}</p>
     </div>
 
     <div class="grid gap-4 sm:grid-cols-2">
@@ -39,50 +141,39 @@ const { id = "quote-form" } = Astro.props;
     </div>
 
     <div class="panel-soft p-6">
-      <h3 class="text-lg font-semibold text-white">First time ordering a print?</h3>
-      <p class="mt-3 text-sm leading-7 text-stone-300">
-        That is fine. If you are not sure about material, dimensions, or file prep, include what
-        you know and ask for help. A short description or rough deadline is enough to get started.
-      </p>
+      <h3 class="text-lg font-semibold text-white">{copy.firstTime}</h3>
+      <p class="mt-3 text-sm leading-7 text-stone-300">{copy.firstTimeBody}</p>
     </div>
   </div>
 
-  <div class="panel p-6 sm:p-8" data-quote-widget>
+  <div class="panel p-6 sm:p-8" data-quote-widget data-selected-prefix={copy.selectedPrefix}>
     <!-- Integration note: replace the demo submit behavior with Formspree, Netlify Forms, Resend, or a custom API endpoint before launch. -->
     <form class="space-y-5" id={id} data-quote-form enctype="multipart/form-data">
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
-          <label class="field-label" for={`${id}-name`}>Name</label>
+          <label class="field-label" for={`${id}-name`}>{copy.name}</label>
           <input class="field-input" id={`${id}-name`} name="name" type="text" autocomplete="name" required />
         </div>
         <div>
-          <label class="field-label" for={`${id}-email`}>Email</label>
+          <label class="field-label" for={`${id}-email`}>{copy.email}</label>
           <input class="field-input" id={`${id}-email`} name="email" type="email" autocomplete="email" required />
         </div>
       </div>
 
-      <div class="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label class="field-label" for={`${id}-phone`}>Phone <span class="text-stone-500">(optional)</span></label>
-          <input class="field-input" id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" />
-        </div>
-        <div>
-          <label class="field-label" for={`${id}-company`}>Company <span class="text-stone-500">(optional)</span></label>
-          <input class="field-input" id={`${id}-company`} name="company" type="text" autocomplete="organization" />
-        </div>
+      <div>
+        <label class="field-label" for={`${id}-company`}>{copy.company} <span class="text-stone-500">{copy.optional}</span></label>
+        <input class="field-input" id={`${id}-company`} name="company" type="text" autocomplete="organization" />
       </div>
 
       <div>
-        <label class="field-label" for={`${id}-file`}>File upload</label>
+        <label class="field-label" for={`${id}-file`}>{copy.fileUpload}</label>
         <label
           class="block cursor-pointer rounded-[1.75rem] border border-dashed border-white/15 bg-stone-900/50 px-5 py-8 text-center transition hover:border-amber-300/60 hover:bg-stone-900"
           for={`${id}-file`}
           data-dropzone
         >
-          <span class="block text-sm font-semibold text-white">Drag your file here or browse from your device</span>
-          <span class="mt-2 block text-sm text-stone-400">
-            Supported: {fileTypes.join(", ")}. Multiple files are allowed.
-          </span>
+          <span class="block text-sm font-semibold text-white">{copy.dropzoneTitle}</span>
+          <span class="mt-2 block text-sm text-stone-400">{copy.dropzoneHint}</span>
           <input
             class="sr-only"
             id={`${id}-file`}
@@ -94,104 +185,95 @@ const { id = "quote-form" } = Astro.props;
             required
           />
         </label>
-        <p class="field-help" data-file-feedback>
-          If your files are too large to attach here, mention that in the project notes and a file
-          transfer option can be arranged.
-        </p>
+        <p class="field-help" data-file-feedback>{copy.fileFeedback}</p>
       </div>
 
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
-          <label class="field-label" for={`${id}-material`}>Preferred material</label>
+          <label class="field-label" for={`${id}-material`}>{copy.material}</label>
           <select class="field-input" id={`${id}-material`} name="preferredMaterial" required>
-            <option value="">Select an option</option>
-            <option value="recommend">Not sure, please recommend</option>
+            <option value="">{copy.materialPlaceholder}</option>
+            <option value="recommend">{copy.recommend}</option>
             {materials.map((material) => (
               <option value={material.name}>{material.name}</option>
             ))}
           </select>
         </div>
         <div>
-          <label class="field-label" for={`${id}-quantity`}>Quantity</label>
+          <label class="field-label" for={`${id}-quantity`}>{copy.quantity}</label>
           <input class="field-input" id={`${id}-quantity`} name="quantity" type="number" min="1" value="1" required />
         </div>
       </div>
 
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
-          <label class="field-label" for={`${id}-dimensions`}>Dimensions <span class="text-stone-500">(optional)</span></label>
-          <input class="field-input" id={`${id}-dimensions`} name="dimensions" type="text" placeholder="Example: 120 x 80 x 35 mm" />
+          <label class="field-label" for={`${id}-dimensions`}>{copy.dimensions} <span class="text-stone-500">{copy.optional}</span></label>
+          <input class="field-input" id={`${id}-dimensions`} name="dimensions" type="text" placeholder={copy.dimensionsPlaceholder} />
         </div>
         <div>
-          <label class="field-label" for={`${id}-color`}>Color preference</label>
-          <input class="field-input" id={`${id}-color`} name="colorPreference" type="text" placeholder="Black, gray, white, or specify" />
+          <label class="field-label" for={`${id}-color`}>{copy.color}</label>
+          <input class="field-input" id={`${id}-color`} name="colorPreference" type="text" placeholder={copy.colorPlaceholder} />
         </div>
       </div>
 
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
-          <label class="field-label" for={`${id}-finish`}>Finish preference</label>
+          <label class="field-label" for={`${id}-finish`}>{copy.finish}</label>
           <select class="field-input" id={`${id}-finish`} name="finishPreference" required>
-            <option value="">Select a finish</option>
-            <option value="standard">Standard print finish</option>
-            <option value="smoother">Smoother appearance is important</option>
-            <option value="functional">Function matters more than appearance</option>
-            <option value="not-sure">Not sure yet</option>
+            {copy.finishOptions.map(([value, label]) => (
+              <option value={value}>{label}</option>
+            ))}
           </select>
         </div>
         <div>
-          <label class="field-label" for={`${id}-deadline`}>Needed by</label>
+          <label class="field-label" for={`${id}-deadline`}>{copy.deadline}</label>
           <input class="field-input" id={`${id}-deadline`} name="deadline" type="date" />
         </div>
       </div>
 
       <fieldset>
-        <legend class="field-label">Delivery or pickup</legend>
+        <legend class="field-label">{copy.delivery}</legend>
         <div class="grid gap-3 sm:grid-cols-3">
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
             <input type="radio" name="fulfillment" value="shipping" checked />
-            <span>Shipping</span>
+            <span>{copy.shipping}</span>
           </label>
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
             <input type="radio" name="fulfillment" value="pickup" />
-            <span>Local pickup</span>
+            <span>{copy.pickup}</span>
           </label>
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
             <input type="radio" name="fulfillment" value="either" />
-            <span>Either works</span>
+            <span>{copy.either}</span>
           </label>
         </div>
       </fieldset>
 
       <div>
-        <label class="field-label" for={`${id}-message`}>Project notes</label>
+        <label class="field-label" for={`${id}-message`}>{copy.notes}</label>
         <textarea
           class="field-input min-h-36"
           id={`${id}-message`}
           name="message"
-          placeholder="Tell us what the part does, where it will be used, whether fit matters, and anything else that would help with the quote."
+          placeholder={copy.notesPlaceholder}
           required
         ></textarea>
       </div>
 
       <div class="rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-stone-200">
-        Honest note: this form requests a quote. It does not run a fake instant pricing engine. If
-        a manual review is needed, you will receive a follow-up by email.
+        {copy.honesty}
       </div>
 
-      <button class="btn-primary w-full" type="submit">Send Quote Request</button>
+      <button class="btn-primary w-full" type="submit">{copy.submit}</button>
     </form>
 
     <div class="space-y-4" data-quote-success hidden tabindex="-1">
       <div class="inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
-        Quote request ready to send
+        {copy.successBadge}
       </div>
-      <h3 class="text-2xl font-semibold text-white">Thanks. Your quote request has been captured in the demo UI.</h3>
-      <p class="text-sm leading-7 text-stone-300">
-        Connect this form to Formspree, Netlify Forms, Resend, or a custom API route so uploaded
-        files and project details are delivered to the business inbox in production.
-      </p>
-      <button class="btn-secondary" type="button" data-reset-form>Submit another request</button>
+      <h3 class="text-2xl font-semibold text-white">{copy.successTitle}</h3>
+      <p class="text-sm leading-7 text-stone-300">{copy.successBody}</p>
+      <button class="btn-secondary" type="button" data-reset-form>{copy.submitAnother}</button>
     </div>
   </div>
 </div>
@@ -209,13 +291,14 @@ const { id = "quote-form" } = Astro.props;
       const dropzone = widget.querySelector("[data-dropzone]");
       const resetButton = widget.querySelector("[data-reset-form]");
       const defaultFeedback = feedback?.textContent ?? "";
+      const selectedPrefix = widget.dataset.selectedPrefix ?? "Selected files";
 
       const updateFeedback = () => {
         const files = fileInput?.files;
         if (!feedback) return;
         if (files && files.length > 0) {
           const names = Array.from(files).map((file) => file.name).join(", ");
-          feedback.textContent = `Selected file${files.length > 1 ? "s" : ""}: ${names}`;
+          feedback.textContent = `${selectedPrefix}: ${names}`;
         } else {
           feedback.textContent = defaultFeedback;
         }

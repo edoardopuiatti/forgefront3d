@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import FAQList from "../../components/FAQList.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import { faqsCs } from "../../data/site-cs";
+---
+
+<BaseLayout
+  title="FAQ"
+  description="Odpovědi na časté otázky o typech souborů, cenách, termínech, materiálech, kusové výrobě, zasílání a očekávaném vzhledu."
+  pathname="/cs/faq/"
+  locale="cs"
+>
+  <PageIntro
+    eyebrow="FAQ"
+    title="Užitečné odpovědi ještě před tím, než pošlete soubor."
+    description="Tohle jsou otázky, které zákazníci řeší nejčastěji před objednáním zakázkového 3D tisku. Pokud je vaše situace specifická, je tu kontaktní stránka."
+    primaryHref="/cs/quote/#quote-form"
+    primaryLabel="Nahrát soubor"
+    secondaryHref="/cs/contact/"
+    secondaryLabel="Kontaktovat nás"
+  />
+
+  <section class="section-shell">
+    <Container>
+      <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <aside class="panel-soft p-6 sm:p-8">
+          <p class="eyebrow">Rychlé poznámky</p>
+          <h2 class="mt-4 text-3xl font-semibold text-white">Na co je služba stavěná.</h2>
+          <ul class="mt-6 space-y-3 text-sm leading-7 text-stone-300">
+            <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">Kusové díly i malé série jsou vítané.</li>
+            <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">Nabídky připravuje reálný člověk, ne falešný automatický kalkulátor.</li>
+            <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">I bez finálního souboru se můžete ozvat a probrat možnosti.</li>
+            <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">Termín i vzhled výtisku závisí na konkrétním dílu, materiálu a způsobu tisku.</li>
+          </ul>
+        </aside>
+
+        <div>
+          <FAQList items={faqsCs} firstOpen={0} />
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

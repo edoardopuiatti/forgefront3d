@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactForm from "../../components/ContactForm.astro";
+import Container from "../../components/Container.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import { siteCs } from "../../data/site-cs";
+---
+
+<BaseLayout
+  title="Kontakt"
+  description="Ozvěte se kvůli zakázkovému 3D tisku, náhradnímu dílu, prototypu nebo cenové nabídce."
+  pathname="/cs/contact/"
+  locale="cs"
+>
+  <PageIntro
+    eyebrow="Kontakt"
+    title="Napište s modelem, náčrtem nebo jen s otázkou."
+    description="Technické i netechnické zadání je v pořádku. Pokud přesně víte, co potřebujete, skvělé. Pokud zatím víte jen problém, který chcete vyřešit, i to stačí."
+    primaryHref="/cs/quote/#quote-form"
+    primaryLabel="Nahrát soubor"
+    secondaryHref={`mailto:${siteCs.email}`}
+    secondaryLabel="Napsat e-mail"
+  />
+
+  <section class="section-shell">
+    <Container>
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <ContactForm locale="cs" />
+
+        <div class="space-y-5">
+          <article class="panel-soft p-6 sm:p-8">
+            <p class="eyebrow">Přímý kontakt</p>
+            <div class="mt-5 space-y-4 text-sm leading-7 text-stone-300">
+              <p>
+                E-mail:
+                <a class="ml-2 text-white transition hover:text-amber-300" href={`mailto:${siteCs.email}`}>
+                  {siteCs.email}
+                </a>
+              </p>
+              <p>Otevírací doba: {siteCs.hours}</p>
+              <p>{siteCs.responseTime}</p>
+            </div>
+          </article>
+
+          <article class="panel-soft p-6 sm:p-8">
+            <p class="eyebrow">Vyzvednutí a doručení</p>
+            <h2 class="mt-4 text-2xl font-semibold text-white">Praha 2 po domluvě nebo zaslání</h2>
+            <p class="mt-4 text-sm leading-7 text-stone-300">
+              Osobní vyzvednutí je možné v Praze 2 po předchozí domluvě. Pokud nejste místní, díly
+              lze po schválení nabídky zaslat.
+            </p>
+            <p class="mt-4 rounded-2xl border border-dashed border-white/15 bg-stone-900/50 px-4 py-6 text-sm text-stone-400">
+              Později sem můžete doplnit mapu, stručnou grafiku obsluhované oblasti nebo přesnější pokyny k vyzvednutí.
+            </p>
+            <p class="mt-4 text-sm text-stone-400">{siteCs.addressLine}</p>
+          </article>
+
+          <article class="panel-soft p-6 sm:p-8">
+            <p class="eyebrow">Kdy psát sem</p>
+            <p class="mt-4 text-sm leading-7 text-stone-300">
+              Kontaktní stránku použijte pro zakázky na míru, dotazy před poptávkou, otázky ohledně
+              tisknutelnosti nebo situace, kdy ještě nemáte hotový model k nahrání.
+            </p>
+          </article>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

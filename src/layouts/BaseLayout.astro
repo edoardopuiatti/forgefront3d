@@ -10,28 +10,38 @@ interface Props {
   pathname?: string;
   ogImage?: string;
   structuredData?: Record<string, unknown>;
+  locale?: "en" | "cs";
 }
 
 const {
   title,
   description = site.description,
   pathname = Astro.url.pathname,
-  ogImage = "/social-share.svg",
+  ogImage = "/social-share.png",
   structuredData,
+  locale = "en",
 } = Astro.props;
 
 const pageTitle = title ? `${title} | ${site.name}` : site.title;
 const canonicalUrl = new URL(pathname, site.url).toString();
 const socialImage = new URL(ogImage, site.url).toString();
+const isCs = locale === "cs";
+const alternateEnPath = pathname.startsWith("/cs")
+  ? pathname.slice(3) || "/"
+  : pathname;
+const alternateCsPath = pathname.startsWith("/cs")
+  ? pathname
+  : `/cs${pathname === "/" ? "/" : pathname}`;
+const alternateEnUrl = new URL(alternateEnPath, site.url).toString();
+const alternateCsUrl = new URL(alternateCsPath, site.url).toString();
 const schema = structuredData ?? {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: site.name,
-  description: site.description,
-  url: site.url,
+  description,
+  url: canonicalUrl,
   email: site.email,
-  telephone: site.phone,
-  areaServed: "Local pickup and shipped orders",
+  areaServed: "Prague 2 pickup and shipped orders",
   makesOffer: {
     "@type": "Offer",
     itemOffered: {
@@ -43,33 +53,44 @@ const schema = structuredData ?? {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={alternateEnUrl} />
+    <link rel="alternate" hreflang="cs" href={alternateCsUrl} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/", site.url).toString()} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:image:secure_url" content={socialImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={isCs ? "Forgefront 3D sdílecí obrázek" : "Forgefront 3D share image"} />
+    <meta property="og:locale" content={isCs ? "cs_CZ" : "en_US"} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content={isCs ? "Forgefront 3D sdílecí obrázek" : "Forgefront 3D share image"} />
 
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
-    <SiteHeader currentPath={pathname} />
+    <SiteHeader currentPath={pathname} locale={locale} />
     <main>
       <slot />
     </main>
-    <SiteFooter />
+    <SiteFooter locale={locale} />
   </body>
 </html>

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
+import Container from "../../components/Container.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import { detailedUseCasesCs } from "../../data/site-cs";
+---
+
+<BaseLayout
+  title="Použití"
+  description="Podívejte se, jak se zakázkový 3D tisk hodí pro náhradní díly, prototypy, hobby projekty, cosplay a malé firemní série."
+  pathname="/cs/use-cases/"
+  locale="cs"
+>
+  <PageIntro
+    eyebrow="Použití"
+    title="3D tisk dává největší smysl tam, kde je zakázka konkrétní."
+    description="Služba je stavěná na praktickou kusovou a nízkoobjemovou výrobu: díly, které nejdou snadno koupit, prototypy, které potřebujete rychle, a zakázky, které nepatří do velkého enterprise workflow."
+    primaryHref="/cs/quote/#quote-form"
+    primaryLabel="Vyžádat nabídku"
+    secondaryHref="/cs/contact/"
+    secondaryLabel="Probrat zakázku"
+  />
+
+  <section class="section-shell">
+    <Container>
+      <div class="space-y-6">
+        {detailedUseCasesCs.map((item) => (
+          <article class="panel grid gap-8 p-6 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div class="space-y-4">
+              <p class="eyebrow">{item.title}</p>
+              <h2 class="text-3xl font-semibold text-white">{item.title}</h2>
+              <p class="text-sm leading-7 text-stone-300">{item.description}</p>
+            </div>
+            <div>
+              <ul class="space-y-3 text-sm leading-7 text-stone-300">
+                {item.bullets.map((bullet) => (
+                  <li class="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">{bullet}</li>
+                ))}
+              </ul>
+              <div class="mt-6">
+                <ButtonLink href="/cs/quote/#quote-form" variant="secondary">Vyžádat nabídku pro tento typ zakázky</ButtonLink>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

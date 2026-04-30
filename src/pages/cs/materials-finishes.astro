@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
+import Container from "../../components/Container.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import { materialsCs } from "../../data/site-cs";
+---
+
+<BaseLayout
+  title="Materiály a povrchy"
+  description="Porovnejte PLA, PETG a ASA podle pevnosti, vzhledu, použití a praktických očekávání od 3D tisku."
+  pathname="/cs/materials-finishes/"
+  locale="cs"
+>
+  <PageIntro
+    eyebrow="Materiály a povrchy"
+    title="Vyberte materiál podle použití dílu, ne jen podle ceny."
+    description="Materiál ovlivňuje pevnost, vzhled, tepelnou odolnost, cenu i chování dílu v praxi. Pokud si nejste jistí, je to běžná součást poptávky."
+    primaryHref="/cs/quote/#quote-form"
+    primaryLabel="Vyžádat nabídku"
+    secondaryHref="/cs/contact/"
+    secondaryLabel="Zeptat se na materiál"
+  />
+
+  <section class="section-shell">
+    <Container>
+      <SectionHeading
+        title="Běžně dostupné materiály"
+        description="Dostupnost se může měnit podle skladových zásob, geometrie dílu a toho, jestli je konkrétní materiál pro danou zakázku opravdu vhodný."
+      />
+      <div class="mt-10 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+        {materialsCs.map((material) => (
+          <article class="panel p-6 sm:p-8">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div>
+                <h2 class="text-2xl font-semibold text-white">{material.name}</h2>
+                <p class="mt-3 max-w-2xl text-sm leading-7 text-stone-300">
+                  {material.quickDescription}
+                </p>
+              </div>
+              <span class="badge">{material.affordability}</span>
+            </div>
+            <div class="mt-8 grid gap-5 sm:grid-cols-2">
+              <div>
+                <p class="text-xs uppercase tracking-[0.2em] text-stone-500">Nejvhodnější použití</p>
+                <p class="mt-2 text-sm leading-6 text-stone-200">{material.bestUse}</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-[0.2em] text-stone-500">Pevnost a odolnost</p>
+                <p class="mt-2 text-sm leading-6 text-stone-200">{material.strength}</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-[0.2em] text-stone-500">Očekávaný vzhled</p>
+                <p class="mt-2 text-sm leading-6 text-stone-200">{material.finish}</p>
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-[0.2em] text-stone-500">Praktická poznámka</p>
+                <p class="mt-2 text-sm leading-6 text-stone-200">{material.caveats}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell border-y border-white/10 bg-black/20">
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-2">
+        <article class="panel-soft p-6 sm:p-8">
+          <SectionHeading
+            eyebrow="Barvy"
+            title="Barvu lze často zvolit, ale záleží na skladové dostupnosti."
+            description="Nejsnazší výchozí bod bývají neutrální barvy jako černá, bílá nebo šedá. Speciální barvy závisí na tom, zda se tiskne z PLA, PETG nebo ASA."
+          />
+        </article>
+        <article class="panel-soft p-6 sm:p-8">
+          <SectionHeading
+            eyebrow="Povrch"
+            title="Počítejte s praktickým tiskovým povrchem, pokud výslovně neřešíme vzhled."
+            description="Běžné výtisky budou mít viditelné vrstvy, orientační stopy a případné čištění podpěr. Pokud je vzhled důležitý, řekněte to hned na začátku."
+          />
+        </article>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell">
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+        <article class="panel p-6 sm:p-8">
+          <p class="eyebrow">Tolerance a přesnost</p>
+          <h2 class="mt-4 text-3xl font-semibold text-white">3D tištěné díly jsou užitečné, ale nejsou bez výrobních odchylek.</h2>
+          <p class="mt-4 text-sm leading-7 text-stone-300">
+            Tolerance závisí na geometrii, materiálu, nastavení tiskárny, orientaci dílu a případném
+            dokončení. U mnoha funkčních dílů jsou výsledky velmi dobré, ale u přesných sestav a
+            kritických ploch je potřeba uvést požadavky předem.
+          </p>
+          <p class="mt-4 text-sm leading-7 text-stone-300">
+            Pokud je některý rozměr zásadní, napište to už do poptávky, aby se dal díl posoudit se správným očekáváním.
+          </p>
+        </article>
+
+        <article class="panel p-6 sm:p-8">
+          <p class="eyebrow">Nejste si jistí výběrem?</p>
+          <h2 class="mt-4 text-3xl font-semibold text-white">Popište použití dílu a materiál doporučíme.</h2>
+          <p class="mt-4 text-sm leading-7 text-stone-300">
+            Pokud víte, co má díl dělat, ale nevíte, jestli dává smysl PLA, PETG nebo ASA, je to
+            úplně běžné. Ve formuláři můžete zvolit, že chcete doporučení materiálu.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <ButtonLink href="/cs/quote/#quote-form">Nahrát soubor</ButtonLink>
+            <ButtonLink href="/cs/faq/" variant="secondary">Přečíst FAQ</ButtonLink>
+          </div>
+        </article>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
