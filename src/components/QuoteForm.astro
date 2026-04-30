@@ -349,18 +349,27 @@ const copy = isCs
             body: formData,
           });
 
-          const result = await response.json();
-
-          if (response.ok && result.next) {
-            // Success
-            form.hidden = true;
-            success.hidden = false;
-            form.reset();
-            updateFeedback();
-            success.focus();
+          if (response.ok) {
+            const result = await response.json();
+            if (result.next) {
+              // Success
+              form.hidden = true;
+              success.hidden = false;
+              form.reset();
+              updateFeedback();
+              success.focus();
+            } else {
+              throw new Error("Unexpected response from server");
+            }
           } else {
-            // Error
-            const errorMessage = result.error || (result.errors && result.errors[0]?.message) || "Form submission failed";
+            // Try to get error message from response
+            let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+            try {
+              const result = await response.json();
+              errorMessage = result.error || (result.errors && result.errors[0]?.message) || errorMessage;
+            } catch {
+              // Response is not JSON, use status
+            }
             throw new Error(errorMessage);
           }
         } catch (error) {
