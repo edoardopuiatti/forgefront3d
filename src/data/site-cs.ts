@@ -7,7 +7,7 @@ export const siteCs = {
   email: "forgefront3d@gmail.com",
   responseTime: "Na většinu poptávek odpovídáme do 1 pracovního dne",
   addressLine: "Osobní vyzvednutí v Praze 2 po domluvě.",
-  hours: "Pondělí-Pátek, 9:00-18:00",
+  hours: "Po - Ne 8:00 - 22:00",
 };
 
 export const navLinksCs = [

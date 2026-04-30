@@ -14,8 +14,6 @@ const content = isCs
   ? {
       description:
         "Rychlý a praktický 3D tisk náhradních dílů, prototypů, zakázkových dílů a malých sérií. Web je stavěný pro zákazníky, kteří chtějí jasné informace a reálnou cenovou nabídku bez zbytečné složitosti.",
-      note:
-        "Před spuštěním nahraďte ukázkové reference, galerii a právní placeholdery reálnými firemními podklady.",
       pagesTitle: "Stránky",
       contactTitle: "Kontakt",
       privacy: "Zásady ochrany osobních údajů",
@@ -25,8 +23,6 @@ const content = isCs
   : {
       description:
         "Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and small batches. Built for customers who want clear answers and a real quote without enterprise complexity.",
-      note:
-        "Replace testimonials, gallery photos, and legal placeholders with real business assets before launch.",
       pagesTitle: "Pages",
       contactTitle: "Contact",
       privacy: "Privacy Policy",
@@ -106,7 +102,7 @@ const legalBase = isCs ? "/cs" : "";
     </div>
 
     <div class="border-t border-white/10 py-5 text-xs text-stone-500">
-      <p>&copy; {new Date().getFullYear()} {site.name}. {content.rights}</p>
+      <p class="text-center">&copy; {new Date().getFullYear()} {site.name}. {content.rights}</p>
     </div>
   </Container>
 </footer>

@@ -7,7 +7,7 @@ export const site = {
   email: "forgefront3d@gmail.com",
   responseTime: "Typical quote replies within 1 business day",
   addressLine: "Pickup available in Prague 2 by appointment.",
-  hours: "Monday-Friday, 9:00 AM-6:00 PM",
+  hours: "Mon - Sun 8am to 10pm",
 };
 
 export const navLinks = [
