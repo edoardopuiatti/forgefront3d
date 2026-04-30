@@ -24,7 +24,7 @@ const copy = isCs
       company: "Firma",
       fileUpload: "Nahrání souboru",
       dropzoneTitle: "Přetáhněte soubor sem nebo ho vyberte z počítače",
-      dropzoneHint: `Podporované formáty: ${fileTypes.join(", ")}. Je možné nahrát více souborů.`,
+      dropzoneHint: `Podporované formáty: ${fileTypes.join(", ")}. Je možné nahrát jeden soubor.`,
       fileFeedback:
         "Pokud jsou soubory příliš velké pro přiložení, napište to do poznámky a domluvíme jiný způsob předání.",
       material: "Preferovaný materiál",
@@ -77,7 +77,7 @@ const copy = isCs
       company: "Company",
       fileUpload: "File upload",
       dropzoneTitle: "Drag your file here or browse from your device",
-      dropzoneHint: `Supported: ${fileTypes.join(", ")}. Multiple files are allowed.`,
+      dropzoneHint: `Supported: ${fileTypes.join(", ")}. One file allowed.`,
       fileFeedback:
         "If your files are too large to attach here, mention that in the project notes and a file transfer option can be arranged.",
       material: "Preferred material",
@@ -189,7 +189,6 @@ const copy = isCs
             name="projectFiles"
             type="file"
             accept=".stl,.step,.stp,.obj,.3mf"
-            multiple
             data-file-input
             required
           />
@@ -347,22 +346,26 @@ const copy = isCs
         try {
           const response = await fetch(endpoint, {
             method: "POST",
-            headers: {
-              Accept: "application/json",
-            },
             body: formData,
           });
 
-          if (!response.ok) throw new Error("Form submission failed");
+          const result = await response.json();
 
-          form.hidden = true;
-          success.hidden = false;
-          form.reset();
-          updateFeedback();
-          success.focus();
+          if (response.ok && result.next) {
+            // Success
+            form.hidden = true;
+            success.hidden = false;
+            form.reset();
+            updateFeedback();
+            success.focus();
+          } else {
+            // Error
+            const errorMessage = result.error || (result.errors && result.errors[0]?.message) || "Form submission failed";
+            throw new Error(errorMessage);
+          }
         } catch (error) {
           console.error(error);
-          alert("Unable to submit your quote request at this time. Please try again later.");
+          alert(`Unable to submit your quote request: ${error.message}. Please try again later.`);
         }
       });
 
