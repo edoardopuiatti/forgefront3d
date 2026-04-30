@@ -6,7 +6,7 @@ export async function getStaticPaths() {
   return [];
 }
 
-const postModules = import.meta.glob("../../../blogs/*.md");
+const postModules = import.meta.glob("../../blogs/*.md");
 const posts = await Promise.all(Object.values(postModules).map(fn => fn()));
 const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
 ---

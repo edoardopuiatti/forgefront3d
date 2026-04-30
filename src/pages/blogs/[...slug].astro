@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
 
 export async function getStaticPaths() {
-  const postModules = import.meta.glob("../../../blogs/*.md");
+  const postModules = import.meta.glob("../../blogs/*.md");
   const posts = await Promise.all(Object.values(postModules).map(fn => fn()));
 
   return posts.map((post) => {
