@@ -13,7 +13,7 @@ const copy = isCs
       eyebrow: "Ceník",
       heading: "Každou poptávku kontroluje reálný člověk.",
       intro:
-        "Cena závisí na velikosti dílu, materiálu, počtu kusů, složitosti, požadovaném vzhledu a termínu. Popište zakázku a dostanete ručně připravenou nabídku s praktickým doporučením.",
+        "Cena závisí na velikosti dílu, materiálu, počtu kusů, složitosti, požadovaném vzhledu a termínu. Nahrajte soubor a popis zakázky a dostanete ručně připravenou nabídku s praktickým doporučením.",
       fileHelp:
         "Preferované formáty: STL, STEP, OBJ a 3MF. Pokud pro vaši zakázku není k dispozici automatická kalkulace, pošleme ruční cenovou nabídku.",
       firstTime: "Objednáváte 3D tisk poprvé?",
@@ -24,7 +24,7 @@ const copy = isCs
       company: "Firma",
       fileUpload: "Nahrání souboru",
       dropzoneTitle: "Přetáhněte soubor sem nebo ho vyberte z počítače",
-      dropzoneHint: `Podporované formáty: ${fileTypes.join(", ")}. Volitelné nahrání souboru.`,
+      dropzoneHint: `Podporované formáty: ${fileTypes.join(", ")}. Je možné nahrát více souborů.`,
       fileFeedback:
         "Pokud jsou soubory příliš velké pro přiložení, napište to do poznámky a domluvíme jiný způsob předání.",
       material: "Preferovaný materiál",
@@ -66,7 +66,7 @@ const copy = isCs
       eyebrow: "Pricing",
       heading: "Quote requests are reviewed by a real person.",
       intro:
-        "Pricing depends on part size, material, quantity, complexity, finish, and urgency. Provide the job details, and a manual quote will be sent back with any practical recommendations.",
+        "Pricing depends on part size, material, quantity, complexity, finish, and urgency. Upload your file and the job details, and a manual quote will be sent back with any practical recommendations.",
       fileHelp:
         "Preferred file types: STL, STEP, OBJ, and 3MF. If instant quoting is not available for your job, a manual quote will be sent instead.",
       firstTime: "First time ordering a print?",
@@ -77,7 +77,7 @@ const copy = isCs
       company: "Company",
       fileUpload: "File upload",
       dropzoneTitle: "Drag your file here or browse from your device",
-      dropzoneHint: `Supported: ${fileTypes.join(", ")}. Optional file upload.`,
+      dropzoneHint: `Supported: ${fileTypes.join(", ")}. Multiple files are allowed.`,
       fileFeedback:
         "If your files are too large to attach here, mention that in the project notes and a file transfer option can be arranged.",
       material: "Preferred material",
@@ -153,6 +153,7 @@ const copy = isCs
       id={id}
       action="https://formspree.io/f/maqvyqee"
       method="POST"
+      enctype="multipart/form-data"
     >
       <input type="hidden" name="_subject" value="Forgefront 3D Quote Request" />
       <input type="hidden" name="_language" value={isCs ? "cs" : "en"} />
@@ -170,6 +171,26 @@ const copy = isCs
       <div>
         <label class="field-label" for={`${id}-company`}>{copy.company} <span class="text-stone-500">{copy.optional}</span></label>
         <input class="field-input" id={`${id}-company`} name="company" type="text" autocomplete="organization" />
+      </div>
+
+      <div>
+        <label class="field-label" for={`${id}-file`}>{copy.fileUpload}</label>
+        <label
+          class="block cursor-pointer rounded-[1.75rem] border border-dashed border-white/15 bg-stone-900/50 px-5 py-8 text-center transition hover:border-amber-300/60 hover:bg-stone-900"
+          for={`${id}-file`}
+        >
+          <span class="block text-sm font-semibold text-white">{copy.dropzoneTitle}</span>
+          <span class="mt-2 block text-sm text-stone-400">{copy.dropzoneHint}</span>
+          <input
+            class="sr-only"
+            id={`${id}-file`}
+            name="projectFiles"
+            type="file"
+            accept=".stl,.step,.stp,.obj,.3mf"
+            multiple
+          />
+        </label>
+        <p class="field-help">{copy.fileFeedback}</p>
       </div>
 
       <div class="grid gap-5 sm:grid-cols-2">
