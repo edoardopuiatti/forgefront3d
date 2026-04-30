@@ -14,6 +14,7 @@ export const navLinksCs = [
   { href: "/cs/", label: "Domů" },
   { href: "/cs/how-it-works/", label: "Jak to funguje" },
   { href: "/cs/materials-finishes/", label: "Materiály a povrchy" },
+  { href: "/cs/blogs/", label: "Blog" },
   { href: "/cs/quote/", label: "Ceník / Poptávka" },
   { href: "/cs/use-cases/", label: "Použití" },
   { href: "/cs/faq/", label: "FAQ" },

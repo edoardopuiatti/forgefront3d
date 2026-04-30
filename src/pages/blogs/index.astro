@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+
+export async function getStaticPaths() {
+  return [];
+}
+
+const posts = await Astro.glob("../../blogs/*.md");
+const sortedPosts = posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+---
+
+<BaseLayout title="Blog | Forgefront 3D" description="Stay updated with the latest 3D printing tips, techniques, and industry insights from Forgefront 3D.">
+  <div class="container mx-auto px-4 py-16">
+    <SectionHeading>
+      <Fragment slot="eyebrow">Our Blog</Fragment>
+      <Fragment slot="heading">3D Printing Insights & Tips</Fragment>
+      <Fragment slot="intro">
+        Stay updated with the latest trends, techniques, and expert advice in the world of 3D printing.
+        From beginner guides to advanced tips, we've got you covered.
+      </Fragment>
+    </SectionHeading>
+
+    <div class="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {sortedPosts.map((post) => (
+        <article class="panel p-6">
+          <div class="flex items-center gap-2 text-sm text-stone-400 mb-3">
+            <time datetime={post.frontmatter.date}>
+              {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+            <span>•</span>
+            <span>{post.frontmatter.author}</span>
+          </div>
+
+          <h2 class="text-xl font-semibold text-white mb-3">
+            <a href={`/blogs/${post.file.split('/').pop().replace('.md', '')}`} class="hover:text-amber-300 transition-colors">
+              {post.frontmatter.title}
+            </a>
+          </h2>
+
+          <p class="text-stone-300 text-sm leading-6 mb-4">
+            {post.frontmatter.excerpt}
+          </p>
+
+          <a
+            href={`/blogs/${post.file.split('/').pop().replace('.md', '')}`}
+            class="inline-flex items-center gap-2 text-amber-300 hover:text-amber-400 transition-colors text-sm font-medium"
+          >
+            Read more
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {sortedPosts.length === 0 && (
+      <div class="text-center py-16">
+        <p class="text-stone-400">No blog posts yet. Check back soon!</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
