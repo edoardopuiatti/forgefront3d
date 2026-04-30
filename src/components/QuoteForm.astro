@@ -148,7 +148,16 @@ const copy = isCs
 
   <div class="panel p-6 sm:p-8" data-quote-widget data-selected-prefix={copy.selectedPrefix}>
     <!-- Integration note: replace the demo submit behavior with Formspree, Netlify Forms, Resend, or a custom API endpoint before launch. -->
-    <form class="space-y-5" id={id} data-quote-form enctype="multipart/form-data">
+    <form
+      class="space-y-5"
+      id={id}
+      action="https://formspree.io/f/maqvyqee"
+      method="POST"
+      data-quote-form
+      enctype="multipart/form-data"
+    >
+      <input type="hidden" name="_subject" value="Forgefront 3D Quote Request" />
+      <input type="hidden" name="_language" value={isCs ? "cs" : "en"} />
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
           <label class="field-label" for={`${id}-name`}>{copy.name}</label>
@@ -328,14 +337,33 @@ const copy = isCs
         }
       });
 
-      form?.addEventListener("submit", (event) => {
+      form?.addEventListener("submit", async (event) => {
         if (!form.reportValidity()) return;
         event.preventDefault();
-        form.hidden = true;
-        success.hidden = false;
-        form.reset();
-        updateFeedback();
-        success.focus();
+
+        const formData = new FormData(form);
+        const endpoint = form.action;
+
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+            },
+            body: formData,
+          });
+
+          if (!response.ok) throw new Error("Form submission failed");
+
+          form.hidden = true;
+          success.hidden = false;
+          form.reset();
+          updateFeedback();
+          success.focus();
+        } catch (error) {
+          console.error(error);
+          alert("Unable to submit your quote request at this time. Please try again later.");
+        }
       });
 
       resetButton?.addEventListener("click", () => {

@@ -52,7 +52,14 @@ const copy = isCs
 
 <div class="panel p-6 sm:p-8" data-contact-widget>
   <!-- Integration note: connect this form to a real email or CRM workflow before launch. -->
-  <form class="space-y-5" data-contact-form>
+  <form
+    class="space-y-5"
+    action="https://formspree.io/f/maqvyqee"
+    method="POST"
+    data-contact-form
+  >
+    <input type="hidden" name="_subject" value="Forgefront 3D Contact Form" />
+    <input type="hidden" name="_language" value={isCs ? "cs" : "en"} />
     <div class="grid gap-5 sm:grid-cols-2">
       <div>
         <label class="field-label" for="contact-name">{copy.name}</label>
@@ -108,13 +115,32 @@ const copy = isCs
       const success = widget.querySelector("[data-contact-success]");
       const resetButton = widget.querySelector("[data-contact-reset]");
 
-      form?.addEventListener("submit", (event) => {
+      form?.addEventListener("submit", async (event) => {
         if (!form.reportValidity()) return;
         event.preventDefault();
-        form.hidden = true;
-        success.hidden = false;
-        form.reset();
-        success.focus();
+
+        const formData = new FormData(form);
+        const endpoint = form.action;
+
+        try {
+          const response = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+            },
+            body: formData,
+          });
+
+          if (!response.ok) throw new Error("Form submission failed");
+
+          form.hidden = true;
+          success.hidden = false;
+          form.reset();
+          success.focus();
+        } catch (error) {
+          console.error(error);
+          alert("Unable to send your message at this time. Please try again later.");
+        }
       });
 
       resetButton?.addEventListener("click", () => {
