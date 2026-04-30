@@ -146,14 +146,13 @@ const copy = isCs
     </div>
   </div>
 
-  <div class="panel p-6 sm:p-8" data-quote-widget data-selected-prefix={copy.selectedPrefix}>
+  <div class="panel p-6 sm:p-8">
     <!-- Integration note: replace the demo submit behavior with Formspree, Netlify Forms, Resend, or a custom API endpoint before launch. -->
     <form
       class="space-y-5"
       id={id}
       action="https://formspree.io/f/maqvyqee"
       method="POST"
-      data-quote-form
     >
       <input type="hidden" name="_subject" value="Forgefront 3D Quote Request" />
       <input type="hidden" name="_language" value={isCs ? "cs" : "en"} />
@@ -251,100 +250,5 @@ const copy = isCs
 
       <button class="btn-primary w-full" type="submit">{copy.submit}</button>
     </form>
-
-    <div class="space-y-4" data-quote-success hidden tabindex="-1">
-      <div class="inline-flex rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
-        {copy.successBadge}
-      </div>
-      <h3 class="text-2xl font-semibold text-white">{copy.successTitle}</h3>
-      <p class="text-sm leading-7 text-stone-300">{copy.successBody}</p>
-      <button class="btn-secondary" type="button" data-reset-form>{copy.submitAnother}</button>
-    </div>
   </div>
 </div>
-
-<script is:inline>
-  const bindQuoteWidgets = () => {
-    document.querySelectorAll("[data-quote-widget]").forEach((widget) => {
-      if (widget.dataset.bound === "true") return;
-      widget.dataset.bound = "true";
-
-      const form = widget.querySelector("[data-quote-form]");
-      const success = widget.querySelector("[data-quote-success]");
-      const resetButton = widget.querySelector("[data-reset-form]");
-      const submitButton = widget.querySelector('button[type="submit"]');
-      const originalButtonText = submitButton.textContent;
-
-      form?.addEventListener("submit", async (event) => {
-        if (!form.reportValidity()) return;
-        event.preventDefault();
-
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
-
-        const formData = new FormData(form);
-        const endpoint = form.action;
-
-        try {
-          const response = await fetch(endpoint, {
-            method: "POST",
-            body: formData,
-            redirect: 'manual',
-          });
-
-          if (response.status === 302) {
-            // Success - Formspree redirects on success
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
-            form.hidden = true;
-            success.hidden = false;
-            form.reset();
-            success.focus();
-          } else if (response.ok) {
-            const result = await response.json();
-            if (result.next) {
-              // Success
-              submitButton.disabled = false;
-              submitButton.textContent = originalButtonText;
-              form.hidden = true;
-              success.hidden = false;
-              form.reset();
-              success.focus();
-            } else {
-              throw new Error("Unexpected response from server");
-            }
-          } else {
-            // Try to get error message from response
-            let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-            try {
-              const result = await response.json();
-              errorMessage = result.error || (result.errors && result.errors[0]?.message) || errorMessage;
-            } catch {
-              // Response is not JSON, use status
-            }
-            throw new Error(errorMessage);
-          }
-        } catch (error) {
-          console.error(error);
-          submitButton.disabled = false;
-          submitButton.textContent = originalButtonText;
-          alert(`Unable to submit your quote request: ${error.message}. Please try again later.`);
-        }
-      });
-
-      resetButton?.addEventListener("click", () => {
-        success.hidden = true;
-        form.hidden = false;
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
-        form.querySelector("input, select, textarea")?.focus();
-      });
-    });
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bindQuoteWidgets);
-  } else {
-    bindQuoteWidgets();
-  }
-</script>
