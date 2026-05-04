@@ -6,7 +6,7 @@ export const site = {
   url: "https://forgefront3d.com",
   email: "forgefront3d@gmail.com",
   responseTime: "Typical quote replies within 1 business day",
-  addressLine: "Pickup available in Prague 2 by appointment.",
+  addressLine: "Pickup available in Prague by appointment.",
   hours: "Mon - Sun 8am to 10pm",
 };
 
@@ -14,7 +14,7 @@ export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/how-it-works/", label: "How It Works" },
   { href: "/materials-finishes/", label: "Materials & Finishes" },
-  { href: "/blogs/", label: "Blog" },
+  { href: "/blog/", label: "Blog" },
   { href: "/quote/", label: "Pricing / Quote" },
   { href: "/use-cases/", label: "Use Cases" },
   { href: "/faq/", label: "FAQ" },
@@ -26,7 +26,7 @@ export const fileTypes = ["STL", "STEP", "OBJ", "3MF"];
 export const trustBarItems = [
   "Human-reviewed quotes",
   "One-off and short-run friendly",
-  "Pickup in Prague 2 or shipping",
+  "Pickup in Prague or shipping",
   "PLA, PETG, and ASA available",
 ];
 
@@ -42,9 +42,9 @@ export const steps = [
       "Every job is reviewed by a real person. You will get pricing, lead time, and help choosing between PLA, PETG, and ASA based on the job.",
   },
   {
-    title: "We print, inspect, and arrange delivery or Prague 2 pickup",
+    title: "We print, inspect, and arrange delivery or Prague pickup",
     description:
-      "Once approved, the job moves into print prep and production. Small parts can often move quickly, with shipping or pickup by appointment in Prague 2.",
+      "Once approved, the job moves into print prep and production. Small parts can often move quickly, with shipping or pickup by appointment in Prague.",
   },
 ];
 
@@ -123,7 +123,7 @@ export const reasons = [
   },
   {
     title: "Personal local service",
-    description: "Pickup can be arranged in Prague 2, and questions are answered by the person actually reviewing and printing the job.",
+    description: "Pickup can be arranged in Prague, and questions are answered by the person actually reviewing and printing the job.",
   },
   {
     title: "Help for non-technical customers",
@@ -212,7 +212,7 @@ export const faqs = [
   {
     question: "Do you ship or offer pickup?",
     answer:
-      "Both options can be arranged. Shipping is available, and local pickup can be arranged in Prague 2 by appointment.",
+      "Both options can be arranged. Shipping is available, and local pickup can be arranged in Prague by appointment.",
   },
   {
     question: "What size parts can you print?",
