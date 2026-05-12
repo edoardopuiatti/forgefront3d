@@ -1,5 +1,5 @@
 ---
-import { fileTypes, materials, priceFactors } from "../data/site";
+import { fileTypes, priceFactors } from "../data/site";
 
 interface Props {
   id?: string;
@@ -147,16 +147,14 @@ const copy = isCs
   </div>
 
   <div class="panel p-6 sm:p-8">
-    <!-- Integration note: replace the demo submit behavior with Formspree, Netlify Forms, Resend, or a custom API endpoint before launch. -->
     <form
       class="space-y-5"
       id={id}
-      action="https://formspree.io/f/maqvyqee"
+      action="https://api.forgefront3d.com/contact"
       method="POST"
       enctype="multipart/form-data"
+      data-quote-form
     >
-      <input type="hidden" name="_subject" value="Forgefront 3D Quote Request" />
-      <input type="hidden" name="_language" value={isCs ? "cs" : "en"} />
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
           <label class="field-label" for={`${id}-name`}>{copy.name}</label>
@@ -184,10 +182,11 @@ const copy = isCs
           <input
             class="sr-only"
             id={`${id}-file`}
-            name="projectFiles"
+            name="files"
             type="file"
-            accept=".stl,.step,.stp,.obj,.3mf"
+            accept=".stl,.step,.stp,.obj,.3mf,.zip,.pdf"
             multiple
+            required
           />
         </label>
         <p class="field-help">{copy.fileFeedback}</p>
@@ -200,9 +199,9 @@ const copy = isCs
           <select class="field-input" id={`${id}-material`} name="preferredMaterial" required>
             <option value="">{copy.materialPlaceholder}</option>
             <option value="recommend">{copy.recommend}</option>
-            {materials.map((material) => (
-              <option value={material.name}>{material.name}</option>
-            ))}
+            <option value="PLA">PLA</option>
+            <option value="PETG">PETG</option>
+            <option value="ASA">ASA</option>
           </select>
         </div>
         <div>
@@ -233,7 +232,7 @@ const copy = isCs
         </div>
         <div>
           <label class="field-label" for={`${id}-deadline`}>{copy.deadline}</label>
-          <input class="field-input" id={`${id}-deadline`} name="deadline" type="date" />
+          <input class="field-input" id={`${id}-deadline`} name="neededBy" type="date" />
         </div>
       </div>
 
@@ -241,15 +240,15 @@ const copy = isCs
         <legend class="field-label">{copy.delivery}</legend>
         <div class="grid gap-3 sm:grid-cols-3">
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="fulfillment" value="shipping" checked />
+            <input type="radio" name="deliveryMethod" value="shipping" checked required />
             <span>{copy.shipping}</span>
           </label>
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="fulfillment" value="pickup" />
+            <input type="radio" name="deliveryMethod" value="pickup" required />
             <span>{copy.pickup}</span>
           </label>
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="fulfillment" value="either" />
+            <input type="radio" name="deliveryMethod" value="either" required />
             <span>{copy.either}</span>
           </label>
         </div>
@@ -260,7 +259,7 @@ const copy = isCs
         <textarea
           class="field-input min-h-36"
           id={`${id}-message`}
-          name="message"
+          name="projectNotes"
           placeholder={copy.notesPlaceholder}
           required
         ></textarea>
@@ -276,52 +275,94 @@ const copy = isCs
 </div>
 
 <script is:inline>
-  const bindFileManagers = () => {
-    const fileInput = document.querySelector('input[name="projectFiles"]');
-    const selectedFilesDiv = document.querySelector("[data-selected-files]");
-    let selectedFiles = [];
+  const bindQuoteFormHandlers = () => {
+    document.querySelectorAll("[data-quote-form]").forEach((form) => {
+      if (form.dataset.bound === "true") return;
+      form.dataset.bound = "true";
 
-    const updateFileList = () => {
-      selectedFilesDiv.innerHTML = "";
-      selectedFiles.forEach((file, index) => {
-        const fileDiv = document.createElement("div");
-        fileDiv.className = "flex items-center justify-between bg-stone-800 rounded-lg px-3 py-2";
-        fileDiv.innerHTML = `
-          <span class="text-sm text-stone-300 truncate">${file.name}</span>
-          <button type="button" class="text-stone-400 hover:text-red-400 ml-2" data-remove="${index}">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
-        `;
-        selectedFilesDiv.appendChild(fileDiv);
+      const fileInput = form.querySelector('input[name="files"]');
+      const selectedFilesDiv = form.querySelector("[data-selected-files]");
+      let selectedFiles = [];
+
+      const updateFileList = () => {
+        selectedFilesDiv.innerHTML = "";
+        selectedFiles.forEach((file, index) => {
+          const fileDiv = document.createElement("div");
+          fileDiv.className = "flex items-center justify-between bg-stone-800 rounded-lg px-3 py-2";
+          fileDiv.innerHTML = `
+            <span class="text-sm text-stone-300 truncate">${file.name}</span>
+            <button type="button" class="text-stone-400 hover:text-red-400 ml-2" data-remove="${index}">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          `;
+          selectedFilesDiv.appendChild(fileDiv);
+        });
+
+        const dt = new DataTransfer();
+        selectedFiles.forEach(file => dt.items.add(file));
+        fileInput.files = dt.files;
+      };
+
+      fileInput?.addEventListener("change", () => {
+        const newFiles = Array.from(fileInput.files);
+        selectedFiles = [...selectedFiles, ...newFiles];
+        updateFileList();
       });
 
-      // Update the input
-      const dt = new DataTransfer();
-      selectedFiles.forEach(file => dt.items.add(file));
-      fileInput.files = dt.files;
-    };
+      selectedFilesDiv?.addEventListener("click", (event) => {
+        const removeBtn = event.target.closest("[data-remove]");
+        if (removeBtn) {
+          const index = parseInt(removeBtn.dataset.remove);
+          selectedFiles.splice(index, 1);
+          updateFileList();
+        }
+      });
 
-    fileInput?.addEventListener("change", () => {
-      const newFiles = Array.from(fileInput.files);
-      selectedFiles = [...selectedFiles, ...newFiles];
-      updateFileList();
-    });
+      // Form submission handler
+      form.addEventListener("submit", async (event) => {
+        if (!form.reportValidity()) return;
+        event.preventDefault();
 
-    selectedFilesDiv?.addEventListener("click", (event) => {
-      const removeBtn = event.target.closest("[data-remove]");
-      if (removeBtn) {
-        const index = parseInt(removeBtn.dataset.remove);
-        selectedFiles.splice(index, 1);
-        updateFileList();
-      }
+        const submitBtn = form.querySelector("button[type='submit']");
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+
+        try {
+          const formData = new FormData(form);
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+          });
+
+          if (response.ok) {
+            // Success
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+            form.reset();
+            selectedFiles = [];
+            updateFileList();
+            alert("Thank you! Your quote request has been sent. We'll review it and get back to you shortly.");
+          } else {
+            const data = await response.json();
+            throw new Error(data.error || "Form submission failed");
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Unable to send your request: " + (error.message || "Please try again later."));
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }
+      });
     });
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bindFileManagers);
+    document.addEventListener("DOMContentLoaded", bindQuoteFormHandlers);
   } else {
-    bindFileManagers();
+    bindQuoteFormHandlers();
   }
 </script>
+

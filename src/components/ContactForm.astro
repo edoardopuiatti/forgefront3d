@@ -22,9 +22,9 @@ const copy = isCs
       messagePlaceholder:
         "Popište díl, projekt nebo problém, který potřebujete vyřešit. Netechnický popis je v pořádku.",
       submit: "Odeslat zprávu",
-      successBadge: "Kontaktní formulář zachycen v demo rozhraní",
-      successTitle: "Děkujeme. Vaše zpráva byla zachycena v demo stavu.",
-      successBody: "Před spuštěním propojte formulář s reálnou e-mailovou schránkou nebo CRM workflow.",
+      successBadge: "Zpráva odeslána",
+      successTitle: "Děkujeme za kontakt.",
+      successBody: "Vaše zpráva byla úspěšně odeslána. Ozveme se vám brzy na váš e-mail.",
       reset: "Poslat další zprávu",
     }
   : {
@@ -43,23 +43,20 @@ const copy = isCs
       messagePlaceholder:
         "Tell us about the part, project, or problem you are trying to solve. Non-technical descriptions are welcome.",
       submit: "Send Message",
-      successBadge: "Contact form demo complete",
-      successTitle: "Thanks. Your message has been captured in the demo UI.",
-      successBody: "Wire this form to your preferred form backend or inbox workflow before going live.",
+      successBadge: "Message sent",
+      successTitle: "Thanks for reaching out.",
+      successBody: "Your message has been successfully sent. We'll get back to you shortly.",
       reset: "Send another message",
     };
 ---
 
 <div class="panel p-6 sm:p-8" data-contact-widget>
-  <!-- Integration note: connect this form to a real email or CRM workflow before launch. -->
   <form
     class="space-y-5"
-    action="https://formspree.io/f/maqvyqee"
+    action="https://api.forgefront3d.com/contact"
     method="POST"
     data-contact-form
   >
-    <input type="hidden" name="_subject" value="Forgefront 3D Contact Form" />
-    <input type="hidden" name="_language" value={isCs ? "cs" : "en"} />
     <div class="grid gap-5 sm:grid-cols-2">
       <div>
         <label class="field-label" for="contact-name">{copy.name}</label>
@@ -121,25 +118,31 @@ const copy = isCs
 
         const formData = new FormData(form);
         const endpoint = form.action;
+        const submitBtn = form.querySelector("button[type='submit']");
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
 
         try {
           const response = await fetch(endpoint, {
             method: "POST",
-            headers: {
-              Accept: "application/json",
-            },
             body: formData,
           });
 
-          if (!response.ok) throw new Error("Form submission failed");
-
-          form.hidden = true;
-          success.hidden = false;
-          form.reset();
-          success.focus();
+          if (response.ok) {
+            form.hidden = true;
+            success.hidden = false;
+            form.reset();
+            success.focus();
+          } else {
+            const data = await response.json();
+            throw new Error(data.error || "Form submission failed");
+          }
         } catch (error) {
           console.error(error);
-          alert("Unable to send your message at this time. Please try again later.");
+          alert("Unable to send your message: " + (error.message || "Please try again later."));
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
         }
       });
 

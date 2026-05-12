@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "forgefront3d-contact",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-02-04",
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "RESEND_API_KEY": "re_WAnS4f1e_abukCfn7F4B4zDERcMnKciEZ"
+  }
+}

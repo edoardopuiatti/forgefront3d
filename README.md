@@ -74,15 +74,64 @@ Astro's current install docs list Node.js `v22.12.0` or higher as the recommende
    npm run preview
    ```
 
-## Integration Notes
+## Cloudflare Worker Setup
 
-- `src/components/QuoteForm.astro` currently ships with a demo client-side success state.
-- Replace the demo submit handler with a real integration before launch:
-  - Formspree
-  - Netlify Forms
-  - Resend + serverless/API route
-  - A custom upload endpoint for larger files
-- `src/components/ContactForm.astro` also uses a demo success state and should be connected to a real email/form backend.
+Form submissions are handled by a Cloudflare Worker deployed to `api.forgefront3d.com`. 
+
+### Worker Configuration
+
+The Worker is located in the `worker/` directory:
+
+- `worker/wrangler.jsonc` – Wrangler configuration with Resend API key
+- `worker/src/index.ts` – TypeScript handler for form submissions
+
+### Environment Setup
+
+1. **Prerequisites:**
+   - Wrangler CLI installed globally: `npm install -g wrangler`
+   - Cloudflare account with Pages project set up
+   - Resend account with API key
+
+2. **Configure Resend API Key:**
+   - Get your API key from https://resend.com/api-keys
+   - Add it to `worker/wrangler.jsonc` under `env.production.vars.RESEND_API_KEY`
+   - The key is already set in the config
+
+3. **Deploy the Worker:**
+
+   ```bash
+   export CLOUDFLARE_API_TOKEN="your-token-here"
+   cd worker
+   wrangler deploy
+   ```
+
+### Email Delivery
+
+- **Provider:** Resend API (independent from Cloudflare, no MX record conflicts)
+- **From Address:** `info@forgefront3d.com`
+- **Recipient:** `info@forgefront3d.com`
+- **Reply-To:** Customer's submitted email address
+- **Mailbox Provider:** Zoho Mail (unchanged, preserves existing MX records)
+- File attachments (up to 25 MB total per submission) are included in the email
+
+### Form Submission Flow
+
+**Quote Form** (`/quote/`):
+- Requires: Name, Email, Material, Quantity, Finish, Delivery Method, Project Notes, at least one file
+- Optional: Company, Dimensions, Color, Needed by date
+- Supports multiple file uploads (STL, STEP, OBJ, 3MF, ZIP, PDF)
+- File limits: 20 MB per file, 25 MB total per submission
+
+**Contact Form** (`/contact/`):
+- Requires: Name, Email, Message, Topic
+- Submits to the same Worker endpoint with optional file support
+
+### Troubleshooting
+
+- If forms fail to submit, check that `api.forgefront3d.com` DNS/routing is correctly configured in Cloudflare
+- Monitor Worker logs: `wrangler tail` in the `worker/` directory
+- Verify the Resend API key in `wrangler.jsonc` is valid and has email sending permissions
+- Check Resend dashboard at https://resend.com for delivery status
 
 ## Content And Assets To Replace Before Launch
 
