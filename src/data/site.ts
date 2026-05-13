@@ -4,7 +4,7 @@ export const site = {
   description:
     "Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and short-run production in Prague. Upload a file and request a quote.",
   url: "https://forgefront3d.com",
-  email: "forgefront3d@gmail.com",
+  email: "info@forgefront3d.com",
   responseTime: "Typical quote replies within 1 business day",
   addressLine: "Pickup available in Prague by appointment.",
   hours: "Mon - Sun 8am to 10pm",

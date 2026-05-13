@@ -4,7 +4,7 @@ export const siteCs = {
   description:
     "Rychlý a praktický 3D tisk náhradních dílů, prototypů a zakázkové výroby v Praze. Nahrajte soubor a vyžádejte si cenovou nabídku.",
   url: "https://forgefront3d.com/cs/",
-  email: "forgefront3d@gmail.com",
+  email: "info@forgefront3d.com",
   responseTime: "Na většinu poptávek odpovídáme do 1 pracovního dne",
   addressLine: "Osobní vyzvednutí v Praze 2 po domluvě.",
   hours: "Po - Ne 8:00 - 22:00",

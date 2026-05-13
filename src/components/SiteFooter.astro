@@ -70,8 +70,8 @@ const legalBase = isCs ? "/cs" : "";
         <p class="text-sm font-semibold uppercase tracking-[0.2em] text-stone-400">{content.contactTitle}</p>
         <div class="mt-5 space-y-3 text-sm text-stone-300">
           <p>
-            <a class="transition hover:text-white" href={`mailto:${site.email}`}>
-              {site.email}
+            <a class="transition hover:text-white" href={`mailto:${isCs ? siteCs.email : site.email}`}>
+              {isCs ? siteCs.email : site.email}
             </a>
           </p>
           <p>{isCs ? siteCs.addressLine : site.addressLine}</p>
