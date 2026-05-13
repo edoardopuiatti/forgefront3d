@@ -245,18 +245,14 @@ const copy = isCs
 
       <fieldset>
         <legend class="field-label">{copy.delivery}</legend>
-        <div class="grid gap-3 sm:grid-cols-3">
+        <div class="grid gap-3 sm:grid-cols-2">
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="deliveryMethod" value="shipping" checked required />
+            <input type="radio" name="deliveryMethod" value="shipping" required />
             <span>{copy.shipping}</span>
           </label>
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="deliveryMethod" value="pickup" required />
+            <input type="radio" name="deliveryMethod" value="pickup" checked required />
             <span>{copy.pickup}</span>
-          </label>
-          <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="deliveryMethod" value="either" required />
-            <span>{copy.either}</span>
           </label>
         </div>
       </fieldset>

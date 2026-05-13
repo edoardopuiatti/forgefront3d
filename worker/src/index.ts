@@ -18,6 +18,14 @@ interface FormFields {
   fileNames: string[];
 }
 
+function uint8ArrayToBase64(arr: Uint8Array): string {
+  let binary = '';
+  for (let i = 0; i < arr.byteLength; i++) {
+    binary += String.fromCharCode(arr[i]);
+  }
+  return btoa(binary);
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     // Handle CORS preflight
@@ -176,7 +184,7 @@ export default {
       try {
         const resendAttachments = attachments.map((att) => ({
           filename: att.filename,
-          content: Buffer.from(att.content).toString("base64"),
+          content: uint8ArrayToBase64(att.content),
           content_type: att.contentType,
         }));
 
