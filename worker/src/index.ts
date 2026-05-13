@@ -170,10 +170,13 @@ export default {
       });
 
       // Send email via Resend API
+      let emailSent = false;
+      let emailError = null;
+
       try {
         const resendAttachments = attachments.map((att) => ({
           filename: att.filename,
-          content: Array.from(att.content),
+          content: Buffer.from(att.content).toString("base64"),
           content_type: att.contentType,
         }));
 
@@ -195,12 +198,19 @@ export default {
 
         const emailResult = await emailResponse.json();
         if (!emailResponse.ok) {
+          emailError = emailResult.message || `Resend API error: ${emailResponse.status}`;
           console.error("Resend API error:", emailResult);
         } else {
+          emailSent = true;
           console.log("Email sent via Resend:", emailResult.id);
         }
-      } catch (emailError: any) {
-        console.error("Email send failed:", emailError?.message || emailError);
+      } catch (err: any) {
+        emailError = err?.message || "Unknown email error";
+        console.error("Email send failed:", err?.message || err);
+      }
+
+      if (!emailSent) {
+        return errorResponse(emailError || "Failed to send email", 500);
       }
 
       return new Response(JSON.stringify({ success: true }), {
