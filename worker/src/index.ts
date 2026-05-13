@@ -62,6 +62,21 @@ export default {
       const deliveryMethod = (formData.get("deliveryMethod") as string)?.trim();
       const projectNotes = (formData.get("projectNotes") as string)?.trim();
 
+      console.log("Form data received:", {
+        name,
+        email,
+        telephone: telephone || "(empty)",
+        company,
+        preferredMaterial,
+        quantity,
+        dimensions,
+        colorPreference,
+        finishPreference,
+        neededBy,
+        deliveryMethod,
+        projectNotes: projectNotes ? "present" : "missing"
+      });
+
       // Validate required text fields
       if (!name) {
         return errorResponse("Name is required", 400);

@@ -8,5 +8,11 @@
   },
   "vars": {
     "RESEND_API_KEY": "re_WAnS4f1e_abukCfn7F4B4zDERcMnKciEZ"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "api.forgefront3d.com/contact",
+      "zone_name": "forgefront3d.com"
+    }
+  ]
 }
