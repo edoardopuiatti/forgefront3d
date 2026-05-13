@@ -132,12 +132,12 @@ export const reasons = [
 ];
 
 export const galleryItems = [
-  { label: "Functional bracket", note: "Replace with real photo of printed bracket" },
-  { label: "Prototype enclosure", note: "Replace with photo of prototype enclosure" },
-  { label: "Replacement knob", note: "Replace with photo of replacement household part" },
-  { label: "Fixture for shop use", note: "Replace with photo of printed tool or jig" },
-  { label: "Cosplay armor detail", note: "Replace with photo of FDM-printed costume component" },
-  { label: "Small batch spacer set", note: "Replace with photo of repeat production parts" },
+  { label: "Turbine Housing Prototype", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/906a631ca4389e4952dcec34e7b281853e4f9f92.jpg" },
+  { label: "Precision Gear Assembly", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/7d9439de8bb579457c4232c8a14d07780b570b11.jpg" },
+  { label: "Functional Robot Prototype", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/c53d5b6d30f8597618b535191d5e6a1a9f5cf971.jpg" },
+  { label: "Custom Camera Rig Part", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/a0ad7a2c6448818bfc1595df7a6721932a9516ca.jpg" },
+  { label: "Mechanical Parts Collection", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/beffbd32eb9aeaf13dde2e3c0cdf60000ec8c938.jpg" },
+  { label: "Prototype Imaging Fixture", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/383baf2e355ee5558129f70aef43a99f6c122106.jpg" },
 ];
 
 export const testimonials = [

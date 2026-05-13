@@ -5,6 +5,7 @@ interface Env {
 interface FormFields {
   name: string;
   email: string;
+  telephone: string;
   company: string;
   preferredMaterial: string;
   quantity: string;
@@ -42,6 +43,7 @@ export default {
       // Extract form fields
       const name = (formData.get("name") as string)?.trim();
       const email = (formData.get("email") as string)?.trim();
+      const telephone = (formData.get("telephone") as string)?.trim() || "";
       const company = (formData.get("company") as string)?.trim() || "";
       const preferredMaterial = (formData.get("preferredMaterial") as string)?.trim();
       const quantity = (formData.get("quantity") as string)?.trim();
@@ -232,6 +234,7 @@ Customer Information
 ─────────────────────
 Name: ${data.name}
 Email: ${data.email}
+Telephone: ${data.telephone || "(not provided)"}
 Company: ${data.company || "(not provided)"}
 
 Project Specifications
