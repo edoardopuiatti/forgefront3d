@@ -180,6 +180,7 @@ export default {
       const emailBody = formatEmailBody({
         name,
         email,
+        telephone,
         company,
         preferredMaterial,
         quantity,
