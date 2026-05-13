@@ -22,6 +22,7 @@ const copy = isCs
       name: "Jméno",
       email: "E-mail",
       company: "Firma",
+      telephone: "Telefon",
       fileUpload: "Nahrání souboru",
       dropzoneTitle: "Přetáhněte soubor sem nebo ho vyberte z počítače",
       dropzoneHint: `Podporované formáty: ${fileTypes.join(", ")}. Je možné nahrát více souborů.`,
@@ -75,6 +76,7 @@ const copy = isCs
       name: "Name",
       email: "Email",
       company: "Company",
+      telephone: "Telephone",
       fileUpload: "File upload",
       dropzoneTitle: "Drag your file here or browse from your device",
       dropzoneHint: `Supported: ${fileTypes.join(", ")}. Multiple files are allowed.`,
@@ -164,6 +166,11 @@ const copy = isCs
           <label class="field-label" for={`${id}-email`}>{copy.email}</label>
           <input class="field-input" id={`${id}-email`} name="email" type="email" autocomplete="email" required />
         </div>
+      </div>
+
+      <div>
+        <label class="field-label" for={`${id}-telephone`}>{copy.telephone} <span class="text-stone-500">{copy.optional}</span></label>
+        <input class="field-input" id={`${id}-telephone`} name="telephone" type="tel" autocomplete="tel" />
       </div>
 
       <div>
