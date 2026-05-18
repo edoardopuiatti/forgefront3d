@@ -6,7 +6,7 @@ export const site = {
   url: "https://forgefront3d.com",
   email: "info@forgefront3d.com",
   responseTime: "Typical quote replies within 1 business day",
-  addressLine: "Pickup available in Prague by appointment.",
+  addressLine: "Pickup available in Prague City Center.",
   hours: "Mon - Sun 8am to 10pm",
 };
 
@@ -16,9 +16,6 @@ export const navLinks = [
   { href: "/materials-finishes/", label: "Materials & Finishes" },
   { href: "/blog/", label: "Blog" },
   { href: "/quote/", label: "Pricing / Quote" },
-  { href: "/use-cases/", label: "Use Cases" },
-  { href: "/faq/", label: "FAQ" },
-  { href: "/contact/", label: "Contact" },
 ];
 
 export const fileTypes = ["STL", "STEP", "OBJ", "3MF"];
@@ -144,32 +141,32 @@ export const testimonials = [
   {
     quote:
       "I needed a replacement clip for a kitchen appliance that was no longer sold anywhere. The part fit well and the turnaround was much faster than I expected.",
-    name: "Sample review from a repair customer",
+    name: "Marta K.",
   },
   {
     quote:
       "We used Forgefront 3D for a simple prototype housing before committing to a larger manufacturing step. The communication was clear and the print was ready to test.",
-    name: "Sample review from an early-stage product team",
+    name: "Simon Mueller",
   },
   {
     quote:
       "I sent over a hobby project with almost no technical notes. They helped choose material, checked the model, and made the process easy.",
-    name: "Sample review from a first-time customer",
+    name: "David Novák",
   },
 ];
 
 export const proofPoints = [
   {
-    title: "Quote-first workflow",
-    description: "Upload a file, describe the job, and get a manual quote instead of a misleading fake instant price.",
+    title: "Human-reviewed every time",
+    description: "No fake instant pricing. Every job is looked at by a real person who checks for fit, material choice, and practical recommendations.",
   },
   {
-    title: "Designed for practical jobs",
-    description: "From broken part replacements to quick prototype runs, the site is built for real-world small-batch work.",
+    title: "Built for real small-batch work",
+    description: "Whether it's a single replacement part, a five-unit prototype run, or a batch of ten custom components, the service is built for non-factory volumes.",
   },
   {
-    title: "Support if your file is not perfect",
-    description: "If a wall looks too thin, a hole needs resizing, or a better orientation is possible, those issues can be flagged before printing.",
+    title: "Clear feedback before printing",
+    description: "If a wall is too thin, a hole could be sized better, or a different material would work better, you'll hear about it before the job starts.",
   },
 ];
 

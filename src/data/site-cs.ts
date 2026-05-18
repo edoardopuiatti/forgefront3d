@@ -6,7 +6,7 @@ export const siteCs = {
   url: "https://forgefront3d.com/cs/",
   email: "info@forgefront3d.com",
   responseTime: "Na většinu poptávek odpovídáme do 1 pracovního dne",
-  addressLine: "Osobní vyzvednutí v Praze 2 po domluvě.",
+  addressLine: "Osobní vyzvednutí v centru Prahy.",
   hours: "Po - Ne 8:00 - 22:00",
 };
 
@@ -16,9 +16,6 @@ export const navLinksCs = [
   { href: "/cs/materials-finishes/", label: "Materiály a povrchy" },
   { href: "/cs/blog/", label: "Blog" },
   { href: "/cs/quote/", label: "Ceník / Poptávka" },
-  { href: "/cs/use-cases/", label: "Použití" },
-  { href: "/cs/faq/", label: "FAQ" },
-  { href: "/cs/contact/", label: "Kontakt" },
 ];
 
 export const fileTypesCs = ["STL", "STEP", "OBJ", "3MF"];

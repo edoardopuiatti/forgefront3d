@@ -122,7 +122,7 @@ const homeStructuredData = {
             </div>
             <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
               <p class="text-xs uppercase tracking-[0.2em] text-stone-500">Pickup</p>
-              <p class="mt-3 text-sm leading-6 text-stone-200">Prague by appointment</p>
+              <p class="mt-3 text-sm leading-6 text-stone-200">Prague City Center</p>
             </div>
             <div class="rounded-2xl border border-white/10 bg-white/5 p-4 sm:col-span-2">
               <p class="text-xs uppercase tracking-[0.2em] text-stone-500">Response time</p>
@@ -215,8 +215,8 @@ const homeStructuredData = {
     <Container>
       <SectionHeading
         eyebrow="Example Work"
-        title="A gallery ready for real print photography."
-        description="The layout is complete now, and these placeholders can be swapped for real part photos without redesigning the page."
+        title="Real projects we've printed."
+        description=""
       />
       <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {galleryItems.map((item, index) => (
@@ -239,8 +239,8 @@ const homeStructuredData = {
         <div>
           <SectionHeading
             eyebrow="Customer Trust"
-            title="Built to feel clear, reliable, and easy to work with."
-            description="Use real customer feedback here before launch. The sample cards below are placeholders that show the intended tone and layout."
+            title="Built for clear, reliable, small-batch work."
+            description=""
           />
           <div class="mt-8 space-y-4">
             {proofPoints.map((point) => (
@@ -269,10 +269,9 @@ const homeStructuredData = {
       <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <SectionHeading
           eyebrow="FAQ"
-          title="Common questions before you upload a file."
-          description="A few fast answers for first-time customers and repeat buyers."
+          title="Questions before uploading a file?"
+          description=""
         />
-        <ButtonLink href="/faq/" variant="secondary">View Full FAQ</ButtonLink>
       </div>
       <div class="mt-10">
         <FAQList items={faqs.slice(0, 6)} firstOpen={0} />
@@ -296,7 +295,6 @@ const homeStructuredData = {
           </div>
           <div class="flex flex-wrap gap-3 lg:justify-end">
             <ButtonLink href="/quote/#quote-form">Upload Your File</ButtonLink>
-            <ButtonLink href="/contact/" variant="secondary">Contact Us For A Custom Job</ButtonLink>
           </div>
         </div>
       </div>

@@ -40,7 +40,6 @@ const legalBase = isCs ? "/cs" : "";
         <p class="max-w-md text-sm leading-7 text-stone-400">
           {content.description}
         </p>
-        <p class="text-xs text-stone-500">{content.note}</p>
       </div>
 
       <div>
@@ -53,16 +52,6 @@ const legalBase = isCs ? "/cs" : "";
               </a>
             </li>
           ))}
-          <li>
-            <a class="transition hover:text-white" href={`${legalBase}/privacy-policy/`}>
-              {content.privacy}
-            </a>
-          </li>
-          <li>
-            <a class="transition hover:text-white" href={`${legalBase}/terms-of-service/`}>
-              {content.terms}
-            </a>
-          </li>
         </ul>
       </div>
 
