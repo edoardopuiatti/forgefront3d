@@ -87,8 +87,8 @@ export default {
       }
 
       // Determine if this is a quote form or simple contact form
-      // Quote forms have preferredMaterial; contact forms may only have a message/topic
-      const isQuoteForm = preferredMaterial !== undefined && preferredMaterial !== null && preferredMaterial !== "";
+      // Quote forms include quote-specific fields like deliveryMethod.
+      const isQuoteForm = deliveryMethod !== undefined && deliveryMethod !== null && deliveryMethod !== "";
       const hasMessage =
         projectNotes !== undefined &&
         projectNotes !== null &&
@@ -96,18 +96,6 @@ export default {
 
       if (isQuoteForm) {
         // Quote form validation
-        if (!preferredMaterial) {
-          return errorResponse("Preferred material is required", 400);
-        }
-
-        if (!quantity) {
-          return errorResponse("Quantity is required", 400);
-        }
-
-        if (!finishPreference) {
-          return errorResponse("Finish preference is required", 400);
-        }
-
         if (!deliveryMethod) {
           return errorResponse("Delivery method is required", 400);
         }
@@ -128,9 +116,7 @@ export default {
         (f) => f instanceof File && f.size > 0
       );
 
-      if (isQuoteForm && validFiles.length === 0) {
-        return errorResponse("At least one file is required", 400);
-      }
+      // Files are optional for quote requests.
 
       // Validate and prepare files
       const maxFileSize = 20 * 1024 * 1024; // 20 MB

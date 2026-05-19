@@ -221,9 +221,9 @@ const homeStructuredData = {
       <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {galleryItems.map((item, index) => (
           <article class:list={["panel-soft overflow-hidden", index % 3 === 0 && "xl:row-span-2"]}>
-            <div class:list={["relative flex min-h-64 items-end p-6", index % 3 === 0 && "min-h-96"]} style={{backgroundImage: `url('${item.url}')`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+            <div class:list={['relative flex min-h-64 items-end', index % 3 === 0 && 'min-h-96']} style={{backgroundImage: `url('${item.url}')`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-              <div class="relative">
+              <div class="relative w-full p-6">
                 <h3 class="text-xl font-semibold text-white">{item.label}</h3>
               </div>
             </div>
@@ -244,7 +244,7 @@ const homeStructuredData = {
           />
           <div class="mt-8 space-y-4">
             {proofPoints.map((point) => (
-              <article class="panel-soft p-5">
+              <article class="rounded-3xl border border-white/10 bg-white/5 p-5">
                 <h3 class="text-base font-semibold text-white">{point.title}</h3>
                 <p class="mt-2 text-sm leading-6 text-stone-300">{point.description}</p>
               </article>
