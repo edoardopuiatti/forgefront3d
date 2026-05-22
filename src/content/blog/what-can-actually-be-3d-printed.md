@@ -1,3 +1,4 @@
+---
 title: "What can actually be 3D printed? A practical guide for beginners"
 description: "Examples of what can (and can't) reasonably be 3D printed, with practical tips."
 pubDate: 2026-04-05
