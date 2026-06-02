@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ButtonLink from "../../components/ButtonLink.astro";
 import Container from "../../components/Container.astro";
+import FAQList from "../../components/FAQList.astro";
 import MaterialPreviewCard from "../../components/MaterialPreviewCard.astro";
 import SectionHeading from "../../components/SectionHeading.astro";
 import {
@@ -119,5 +120,176 @@ const homeStructuredData = {
     </Container>
   </section>
 
-  <!-- Remaining sections omitted for brevity, the page mirrors the existing English root content -->
+  <section class="section-shell">
+    <Container>
+      <SectionHeading
+        eyebrow="How it works"
+        title="A simple process from quote to printed part."
+        description="This service is designed for customers who want a clear response and practical guidance, not a complicated factory portal."
+      />
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {steps.map((step, index) => (
+          <article class="panel p-6">
+            <div class="flex items-center gap-4">
+              <span class="flex h-11 w-11 items-center justify-center rounded-full border border-amber-300/30 bg-amber-300/10 text-sm font-semibold text-amber-300">
+                0{index + 1}
+              </span>
+              <h3 class="text-xl font-semibold text-white">{step.title}</h3>
+            </div>
+            <p class="mt-5 text-sm leading-7 text-stone-300">{step.description}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell border-y border-white/10 bg-black/20">
+    <Container>
+      <SectionHeading
+        eyebrow="What we print"
+        title="Useful parts for real use."
+        description="From replacement pieces to prototype housings, the aim is custom prints that solve an actual problem."
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+        {homeUseCases.map((item) => (
+          <article class="panel-soft p-6">
+            <h3 class="text-lg font-semibold text-white">{item.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-stone-300">{item.description}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell">
+    <Container>
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <SectionHeading
+          eyebrow="Materials"
+          title="Common materials for functional and visual parts."
+          description="Material choice affects strength, finish, cost, and how the part behaves in use."
+        />
+        <ButtonLink href="/materials-finishes/" variant="secondary">View all materials</ButtonLink>
+      </div>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+        {materials.map((material) => (
+          <MaterialPreviewCard material={material} />
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell border-y border-white/10 bg-black/20">
+    <Container>
+      <SectionHeading
+        eyebrow="Why choose us"
+        title="A small service without uncertainty."
+        description="Personalized 3D printing means you can ask questions, get practical material advice, and order small jobs without factory workflows."
+      />
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-2">
+        {reasons.map((reason) => (
+          <article class="panel-soft p-6">
+            <h3 class="text-xl font-semibold text-white">{reason.title}</h3>
+            <p class="mt-4 text-sm leading-7 text-stone-300">{reason.description}</p>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell">
+    <Container>
+      <SectionHeading
+        eyebrow="Work examples"
+        title="A gallery ready for real print photos."
+        description="The layout is in place now and can be upgraded with actual part imagery later."
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {galleryItems.map((item, index) => (
+          <article class:list={["panel-soft overflow-hidden", index % 3 === 0 && "xl:row-span-2"]}>
+            <div class:list={["relative flex min-h-64 items-end p-6", index % 3 === 0 && "min-h-96"]} style={{ backgroundImage: `url('${item.url}')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+              <div class="relative">
+                <h3 class="text-xl font-semibold text-white">{item.label}</h3>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell border-y border-white/10 bg-black/20">
+    <Container>
+      <div class="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+        <div>
+          <SectionHeading
+            eyebrow="Trust"
+            title="A website built to feel clear and reliable."
+            description="Before launch, add actual customer references here. Below are example cards showing the intended tone and layout."
+          />
+
+          <div class="mt-8 space-y-4">
+            {proofPoints.map((point) => (
+              <article class="panel-soft p-5">
+                <h3 class="text-base font-semibold text-white">{point.title}</h3>
+                <p class="mt-2 text-sm leading-6 text-stone-300">{point.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="grid gap-5">
+          {testimonials.map((item) => (
+            <blockquote class="panel p-6">
+              <p class="text-base leading-7 text-stone-100">"{item.quote}"</p>
+              <footer class="mt-5 text-sm text-stone-400">{item.name}</footer>
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell">
+    <Container>
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <SectionHeading
+          eyebrow="FAQ"
+          title="Common questions before sending a file."
+          description="A few quick answers for first-time customers and repeat builders."
+        />
+      </div>
+
+      <div class="mt-10">
+        <FAQList items={faqs.slice(0, 6)} firstOpen={0} />
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-shell border-t border-white/10">
+    <Container>
+      <div class="panel overflow-hidden">
+        <div class="grid gap-8 p-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center lg:p-10">
+          <div class="space-y-4">
+            <p class="eyebrow">Ready to get started?</p>
+            <h2 class="text-3xl font-semibold text-white sm:text-4xl">
+              Need a part printed? Upload your file and request a quote.
+            </h2>
+            <p class="max-w-2xl text-base leading-7 text-stone-300">
+              Smaller jobs can be handled quickly, and it’s okay if you’re not a technical customer. Send the file, or at least a clear description.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3 lg:justify-end">
+            <ButtonLink href="/quote/#quote-form">Upload Your File</ButtonLink>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
 </BaseLayout>
