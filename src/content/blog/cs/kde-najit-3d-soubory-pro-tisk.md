@@ -2,7 +2,7 @@
 title: "Kde najít soubory pro 3D tisk: Definitivní průvodce repozitáři, vyhledávači a CAD knihovnami"
 description: "Komplexní průvodce hledáním 3D tiskových souborů v roce 2026: porovnání Printables, MakerWorld, Thingiverse, GrabCAD a dalších. Najděte tisknutelné modely, STEP soubory a pokyny k licencování."
 pubDate: 2026-06-01
-heroImage: "https://images.pexels.com/photos/3588365/pexels-photo-3588365.jpeg?auto=compress&cs=tinysrgb&w=1600"
+heroImage: "https://www.fabbaloo.com/wp-content/uploads/2024/05/alternatives-thingiverse-cover-2024.jpg"
 ---
 
 # Kde najít soubory pro 3D tisk: Definitivní průvodce repozitáři, vyhledávači a CAD knihovnami

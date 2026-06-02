@@ -30,48 +30,48 @@ const description = "Nejnovější novinky a praktické poznatky o 3D tisku od F
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <article class="group rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-[0_18px_50px_rgba(0,0,0,0.18)] transition duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.06]">
-            {post.data.heroImage && (
-              <div class="overflow-hidden rounded-t-[1.75rem]">
-                <img
-                  src={post.data.heroImage}
-                  alt={post.data.title}
-                  class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
-                />
-              </div>
-            )}
-            <div class="p-6">
-              <div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-amber-300">
-                <time datetime={post.data.pubDate.toISOString()}>
-                  {post.data.pubDate.toLocaleDateString("cs-CZ", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </time>
-                {post.data.updatedDate && (
-                  <span>
-                    Aktualizováno {post.data.updatedDate.toLocaleDateString("cs-CZ", {
+            <a href={`/cs/blog/${post.id}/`} class="block rounded-[2rem] overflow-hidden hover:no-underline">
+              {post.data.heroImage && (
+                <div class="overflow-hidden rounded-t-[1.75rem]">
+                  <img
+                    src={post.data.heroImage}
+                    alt={post.data.title}
+                    class="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+                </div>
+              )}
+              <div class="p-6">
+                <div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.28em] text-amber-300">
+                  <time datetime={post.data.pubDate.toISOString()}>
+                    {post.data.pubDate.toLocaleDateString("cs-CZ", {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
                     })}
-                  </span>
-                )}
-              </div>
+                  </time>
+                  {post.data.updatedDate && (
+                    <span>
+                      Aktualizováno {post.data.updatedDate.toLocaleDateString("cs-CZ", {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                  )}
+                </div>
 
-              <h2 class="mt-4 text-2xl font-semibold text-white leading-tight">
-                <a href={`/cs/blog/${post.id}/`} class="hover:text-amber-300 transition-colors">
+                <h2 class="mt-4 text-2xl font-semibold text-white leading-tight hover:text-amber-300 transition-colors">
                   {post.data.title}
-                </a>
-              </h2>
+                </h2>
 
-              <p class="mt-4 text-sm leading-7 text-stone-300">{post.data.description}</p>
+                <p class="mt-4 text-sm leading-7 text-stone-300">{post.data.description}</p>
 
-              <div class="mt-6 flex items-center justify-between text-sm font-semibold text-amber-300">
-                <span>Číst článek</span>
-                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                <div class="mt-6 flex items-center justify-between text-sm font-semibold text-amber-300">
+                  <span>Číst článek</span>
+                  <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+                </div>
               </div>
-            </div>
+            </a>
           </article>
         ))}
       </div>

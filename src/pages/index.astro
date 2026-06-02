@@ -1,10 +1,4 @@
 ---
-const requestUrl = new URL(Astro.request.url);
-const lang = requestUrl.searchParams.get('lang');
-if (lang !== 'en') {
-  return Astro.rewrite('/cs/');
-}
-
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ButtonLink from "../components/ButtonLink.astro";
 import Container from "../components/Container.astro";
@@ -23,6 +17,12 @@ import {
   testimonials,
   trustBarItems,
 } from "../data/site";
+
+const requestUrl = new URL(Astro.request.url);
+const lang = requestUrl.searchParams.get('lang');
+if (lang !== 'en') {
+  return Astro.rewrite('/cs/');
+}
 
 const homeStructuredData = {
   "@context": "https://schema.org",
