@@ -18,11 +18,8 @@ import {
   trustBarItems,
 } from "../data/site";
 
-const requestUrl = new URL(Astro.request.url);
-const lang = requestUrl.searchParams.get('lang');
-if (lang !== 'en') {
-  return Astro.rewrite('/cs/');
-}
+// Server-side rewrite removed: keep root (/) as the English homepage
+// Language switching is handled by separate `/cs/` pages and the header links.
 
 const homeStructuredData = {
   "@context": "https://schema.org",
