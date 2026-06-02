@@ -1,2 +1,5 @@
 User-agent: *
 Allow: /
+
+# Sitemap for search engines
+Sitemap: https://forgefront3d.com/sitemap-0.xml
