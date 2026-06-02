@@ -1,11 +1,15 @@
 ---
-import { materials } from "../data/site";
-
-interface Props {
-  material: (typeof materials)[number];
+interface MaterialPreviewCardProps {
+  material: {
+    name: string;
+    quickDescription: string;
+    bestUse: string;
+    affordability: string;
+    durability: string;
+  };
 }
 
-const { material } = Astro.props;
+const { material } = Astro.props as MaterialPreviewCardProps;
 ---
 
 <article class="panel-soft p-6">

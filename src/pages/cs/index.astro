@@ -220,11 +220,10 @@ const homeStructuredData = {
       <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {galleryItemsCs.map((item, index) => (
           <article class:list={["panel-soft overflow-hidden", index % 3 === 0 && "xl:row-span-2"]}>
-            <div class:list={["flex min-h-64 items-end bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02)),linear-gradient(135deg,rgba(245,158,11,0.18),transparent_55%)] p-6", index % 3 === 0 && "min-h-96"]}>
-              <div>
-                <p class="text-xs uppercase tracking-[0.24em] text-stone-400">Místo pro fotografii</p>
-                <h3 class="mt-3 text-xl font-semibold text-white">{item.label}</h3>
-                <p class="mt-2 text-sm text-stone-300">{item.note}</p>
+            <div class:list={["relative flex min-h-64 items-end p-6", index % 3 === 0 && "min-h-96"]} style={{backgroundImage: `url('${item.url}')`, backgroundSize: 'cover', backgroundPosition: 'center'}}>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+              <div class="relative">
+                <h3 class="text-xl font-semibold text-white">{item.label}</h3>
               </div>
             </div>
           </article>
@@ -272,7 +271,6 @@ const homeStructuredData = {
           title="Časté otázky před odesláním souboru."
           description="Pár rychlých odpovědí pro první objednávku i opakované zákazníky."
         />
-        <ButtonLink href="/cs/faq/" variant="secondary">Celé FAQ</ButtonLink>
       </div>
       <div class="mt-10">
         <FAQList items={faqsCs.slice(0, 6)} firstOpen={0} />
@@ -295,7 +293,6 @@ const homeStructuredData = {
           </div>
           <div class="flex flex-wrap gap-3 lg:justify-end">
             <ButtonLink href="/cs/quote/#quote-form">Nahrát soubor</ButtonLink>
-            <ButtonLink href="/cs/contact/" variant="secondary">Kontakt pro zakázku na míru</ButtonLink>
           </div>
         </div>
       </div>

@@ -5,6 +5,7 @@ interface Env {
 interface FormFields {
   name: string;
   email: string;
+  telephone: string;
   company: string;
   preferredMaterial: string;
   quantity: string;
@@ -15,6 +16,14 @@ interface FormFields {
   deliveryMethod: string;
   projectNotes: string;
   fileNames: string[];
+}
+
+function uint8ArrayToBase64(arr: Uint8Array): string {
+  let binary = '';
+  for (let i = 0; i < arr.byteLength; i++) {
+    binary += String.fromCharCode(arr[i]);
+  }
+  return btoa(binary);
 }
 
 export default {
@@ -42,6 +51,7 @@ export default {
       // Extract form fields
       const name = (formData.get("name") as string)?.trim();
       const email = (formData.get("email") as string)?.trim();
+      const telephone = (formData.get("telephone") as string)?.trim() || "";
       const company = (formData.get("company") as string)?.trim() || "";
       const preferredMaterial = (formData.get("preferredMaterial") as string)?.trim();
       const quantity = (formData.get("quantity") as string)?.trim();
@@ -51,6 +61,21 @@ export default {
       const neededBy = (formData.get("neededBy") as string)?.trim() || "";
       const deliveryMethod = (formData.get("deliveryMethod") as string)?.trim();
       const projectNotes = (formData.get("projectNotes") as string)?.trim();
+
+      console.log("Form data received:", {
+        name,
+        email,
+        telephone: telephone || "(empty)",
+        company,
+        preferredMaterial,
+        quantity,
+        dimensions,
+        colorPreference,
+        finishPreference,
+        neededBy,
+        deliveryMethod,
+        projectNotes: projectNotes ? "present" : "missing"
+      });
 
       // Validate required text fields
       if (!name) {
@@ -62,8 +87,8 @@ export default {
       }
 
       // Determine if this is a quote form or simple contact form
-      // Quote forms have preferredMaterial; contact forms may only have a message/topic
-      const isQuoteForm = preferredMaterial !== undefined && preferredMaterial !== null && preferredMaterial !== "";
+      // Quote forms include quote-specific fields like deliveryMethod.
+      const isQuoteForm = deliveryMethod !== undefined && deliveryMethod !== null && deliveryMethod !== "";
       const hasMessage =
         projectNotes !== undefined &&
         projectNotes !== null &&
@@ -71,18 +96,6 @@ export default {
 
       if (isQuoteForm) {
         // Quote form validation
-        if (!preferredMaterial) {
-          return errorResponse("Preferred material is required", 400);
-        }
-
-        if (!quantity) {
-          return errorResponse("Quantity is required", 400);
-        }
-
-        if (!finishPreference) {
-          return errorResponse("Finish preference is required", 400);
-        }
-
         if (!deliveryMethod) {
           return errorResponse("Delivery method is required", 400);
         }
@@ -103,9 +116,7 @@ export default {
         (f) => f instanceof File && f.size > 0
       );
 
-      if (isQuoteForm && validFiles.length === 0) {
-        return errorResponse("At least one file is required", 400);
-      }
+      // Files are optional for quote requests.
 
       // Validate and prepare files
       const maxFileSize = 20 * 1024 * 1024; // 20 MB
@@ -155,6 +166,7 @@ export default {
       const emailBody = formatEmailBody({
         name,
         email,
+        telephone,
         company,
         preferredMaterial,
         quantity,
@@ -168,10 +180,13 @@ export default {
       });
 
       // Send email via Resend API
+      let emailSent = false;
+      let emailError = null;
+
       try {
         const resendAttachments = attachments.map((att) => ({
           filename: att.filename,
-          content: Array.from(att.content),
+          content: uint8ArrayToBase64(att.content),
           content_type: att.contentType,
         }));
 
@@ -193,12 +208,19 @@ export default {
 
         const emailResult = await emailResponse.json();
         if (!emailResponse.ok) {
+          emailError = emailResult.message || `Resend API error: ${emailResponse.status}`;
           console.error("Resend API error:", emailResult);
         } else {
+          emailSent = true;
           console.log("Email sent via Resend:", emailResult.id);
         }
-      } catch (emailError: any) {
-        console.error("Email send failed:", emailError?.message || emailError);
+      } catch (err: any) {
+        emailError = err?.message || "Unknown email error";
+        console.error("Email send failed:", err?.message || err);
+      }
+
+      if (!emailSent) {
+        return errorResponse(emailError || "Failed to send email", 500);
       }
 
       return new Response(JSON.stringify({ success: true }), {
@@ -232,6 +254,7 @@ Customer Information
 ─────────────────────
 Name: ${data.name}
 Email: ${data.email}
+Telephone: ${data.telephone || "(not provided)"}
 Company: ${data.company || "(not provided)"}
 
 Project Specifications

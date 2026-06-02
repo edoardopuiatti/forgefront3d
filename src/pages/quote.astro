@@ -25,22 +25,13 @@ import SectionHeading from "../components/SectionHeading.astro";
 
   <section class="section-shell border-t border-white/10 bg-black/20">
     <Container>
-      <div class="grid gap-8 lg:grid-cols-2">
-        <article class="panel-soft p-6 sm:p-8">
-          <SectionHeading
-            eyebrow="Need Help First?"
-            title="You can still ask for a quote even if the file is not final."
-            description="If the model needs review, the dimensions are not confirmed, or you only have a rough concept, include those details in the notes. The best next step can still be discussed."
-          />
-        </article>
-        <article class="panel-soft p-6 sm:p-8">
-          <SectionHeading
-            eyebrow="Optional Guide"
-            title="Add a future file-prep guide here."
-            description="This layout has room for a downloadable guide such as 'How to prepare your 3D file for quoting.' Link a PDF or simple guide page when the business is ready."
-          />
-        </article>
-      </div>
+      <article class="panel-soft p-6 sm:p-8">
+        <SectionHeading
+          eyebrow="Need Help First?"
+          title="You can still ask for a quote even if the file is not final."
+          description="If the model needs review, the dimensions are not confirmed, or you only have a rough concept, include those details in the notes. The best next step can still be discussed."
+        />
+      </article>
     </Container>
   </section>
 </BaseLayout>

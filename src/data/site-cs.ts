@@ -4,9 +4,9 @@ export const siteCs = {
   description:
     "Rychlý a praktický 3D tisk náhradních dílů, prototypů a zakázkové výroby v Praze. Nahrajte soubor a vyžádejte si cenovou nabídku.",
   url: "https://forgefront3d.com/cs/",
-  email: "forgefront3d@gmail.com",
+  email: "info@forgefront3d.com",
   responseTime: "Na většinu poptávek odpovídáme do 1 pracovního dne",
-  addressLine: "Osobní vyzvednutí v Praze 2 po domluvě.",
+  addressLine: "Osobní vyzvednutí v centru Prahy.",
   hours: "Po - Ne 8:00 - 22:00",
 };
 
@@ -16,9 +16,6 @@ export const navLinksCs = [
   { href: "/cs/materials-finishes/", label: "Materiály a povrchy" },
   { href: "/cs/blog/", label: "Blog" },
   { href: "/cs/quote/", label: "Ceník / Poptávka" },
-  { href: "/cs/use-cases/", label: "Použití" },
-  { href: "/cs/faq/", label: "FAQ" },
-  { href: "/cs/contact/", label: "Kontakt" },
 ];
 
 export const fileTypesCs = ["STL", "STEP", "OBJ", "3MF"];
@@ -132,12 +129,12 @@ export const reasonsCs = [
 ];
 
 export const galleryItemsCs = [
-  { label: "Funkční držák", note: "Nahraďte reálnou fotkou vytištěného držáku" },
-  { label: "Prototypový kryt", note: "Nahraďte fotkou prototypového krytu" },
-  { label: "Náhradní knoflík", note: "Nahraďte fotkou náhradního dílu do domácnosti" },
-  { label: "Dílenský přípravek", note: "Nahraďte fotkou tištěného nástroje nebo jig-u" },
-  { label: "Detail ke cosplayi", note: "Nahraďte fotkou FDM dílu ke kostýmu" },
-  { label: "Malá série distančních dílů", note: "Nahraďte fotkou opakované výroby" },
+  { label: "Turbine Housing Prototype", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/906a631ca4389e4952dcec34e7b281853e4f9f92.jpg" },
+  { label: "Precision Gear Assembly", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/7d9439de8bb579457c4232c8a14d07780b570b11.jpg" },
+  { label: "Functional Robot Prototype", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/c53d5b6d30f8597618b535191d5e6a1a9f5cf971.jpg" },
+  { label: "Custom Camera Rig Part", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/a0ad7a2c6448818bfc1595df7a6721932a9516ca.jpg" },
+  { label: "Mechanical Parts Collection", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/beffbd32eb9aeaf13dde2e3c0cdf60000ec8c938.jpg" },
+  { label: "Prototype Imaging Fixture", url: "https://pplx-res.cloudinary.com/image/upload/pplx_search_images/383baf2e355ee5558129f70aef43a99f6c122106.jpg" },
 ];
 
 export const testimonialsCs = [

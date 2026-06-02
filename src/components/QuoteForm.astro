@@ -22,11 +22,12 @@ const copy = isCs
       name: "Jméno",
       email: "E-mail",
       company: "Firma",
+      telephone: "Telefon",
       fileUpload: "Nahrání souboru",
       dropzoneTitle: "Přetáhněte soubor sem nebo ho vyberte z počítače",
       dropzoneHint: `Podporované formáty: ${fileTypes.join(", ")}. Je možné nahrát více souborů.`,
       fileFeedback:
-        "Pokud jsou soubory příliš velké pro přiložení, napište to do poznámky a domluvíme jiný způsob předání.",
+        "Maximální velikost souboru je 25 MB. Nahrání souboru je volitelné — svůj projekt můžete popsat také v poznámkách.",
       material: "Preferovaný materiál",
       materialPlaceholder: "Vyberte možnost",
       recommend: "Nejsem si jistý/á, prosím doporučit",
@@ -75,11 +76,12 @@ const copy = isCs
       name: "Name",
       email: "Email",
       company: "Company",
+      telephone: "Telephone",
       fileUpload: "File upload",
       dropzoneTitle: "Drag your file here or browse from your device",
       dropzoneHint: `Supported: ${fileTypes.join(", ")}. Multiple files are allowed.`,
       fileFeedback:
-        "If your files are too large to attach here, mention that in the project notes and a file transfer option can be arranged.",
+        "Maximum file size is 25 MB. File upload is optional — you can describe your project in the notes instead.",
       material: "Preferred material",
       materialPlaceholder: "Select an option",
       recommend: "Not sure, please recommend",
@@ -157,13 +159,18 @@ const copy = isCs
     >
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
-          <label class="field-label" for={`${id}-name`}>{copy.name}</label>
+          <label class="field-label" for={`${id}-name`}>{copy.name} <span class="text-red-500">*</span></label>
           <input class="field-input" id={`${id}-name`} name="name" type="text" autocomplete="name" required />
         </div>
         <div>
-          <label class="field-label" for={`${id}-email`}>{copy.email}</label>
+          <label class="field-label" for={`${id}-email`}>{copy.email} <span class="text-red-500">*</span></label>
           <input class="field-input" id={`${id}-email`} name="email" type="email" autocomplete="email" required />
         </div>
+      </div>
+
+      <div>
+        <label class="field-label" for={`${id}-telephone`}>{copy.telephone} <span class="text-stone-500">{copy.optional}</span></label>
+        <input class="field-input" id={`${id}-telephone`} name="telephone" type="tel" autocomplete="tel" />
       </div>
 
       <div>
@@ -186,7 +193,6 @@ const copy = isCs
             type="file"
             accept=".stl,.step,.stp,.obj,.3mf,.zip,.pdf"
             multiple
-            required
           />
         </label>
         <p class="field-help">{copy.fileFeedback}</p>
@@ -196,7 +202,7 @@ const copy = isCs
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
           <label class="field-label" for={`${id}-material`}>{copy.material}</label>
-          <select class="field-input" id={`${id}-material`} name="preferredMaterial" required>
+          <select class="field-input" id={`${id}-material`} name="preferredMaterial">
             <option value="">{copy.materialPlaceholder}</option>
             <option value="recommend">{copy.recommend}</option>
             <option value="PLA">PLA</option>
@@ -206,7 +212,7 @@ const copy = isCs
         </div>
         <div>
           <label class="field-label" for={`${id}-quantity`}>{copy.quantity}</label>
-          <input class="field-input" id={`${id}-quantity`} name="quantity" type="number" min="1" value="1" required />
+          <input class="field-input" id={`${id}-quantity`} name="quantity" type="number" min="1" value="1" />
         </div>
       </div>
 
@@ -224,7 +230,7 @@ const copy = isCs
       <div class="grid gap-5 sm:grid-cols-2">
         <div>
           <label class="field-label" for={`${id}-finish`}>{copy.finish}</label>
-          <select class="field-input" id={`${id}-finish`} name="finishPreference" required>
+          <select class="field-input" id={`${id}-finish`} name="finishPreference">
             {copy.finishOptions.map(([value, label]) => (
               <option value={value}>{label}</option>
             ))}
@@ -238,24 +244,20 @@ const copy = isCs
 
       <fieldset>
         <legend class="field-label">{copy.delivery}</legend>
-        <div class="grid gap-3 sm:grid-cols-3">
+        <div class="grid gap-3 sm:grid-cols-2">
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="deliveryMethod" value="shipping" checked required />
-            <span>{copy.shipping}</span>
-          </label>
-          <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="deliveryMethod" value="pickup" required />
+            <input type="radio" name="deliveryMethod" value="pickup" checked required />
             <span>{copy.pickup}</span>
           </label>
           <label class="flex items-center gap-3 rounded-2xl border border-white/10 bg-stone-900/70 px-4 py-3 text-sm text-stone-200">
-            <input type="radio" name="deliveryMethod" value="either" required />
-            <span>{copy.either}</span>
+            <input type="radio" name="deliveryMethod" value="shipping" required />
+            <span>{copy.shipping}</span>
           </label>
         </div>
       </fieldset>
 
       <div>
-        <label class="field-label" for={`${id}-message`}>{copy.notes}</label>
+        <label class="field-label" for={`${id}-message`}>{copy.notes} <span class="text-red-500">*</span></label>
         <textarea
           class="field-input min-h-36"
           id={`${id}-message`}
@@ -263,10 +265,6 @@ const copy = isCs
           placeholder={copy.notesPlaceholder}
           required
         ></textarea>
-      </div>
-
-      <div class="rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-sm leading-6 text-stone-200">
-        {copy.honesty}
       </div>
 
       <button class="btn-primary w-full" type="submit">{copy.submit}</button>
@@ -322,7 +320,13 @@ const copy = isCs
 
       // Form submission handler
       form.addEventListener("submit", async (event) => {
+        // Custom validation - only require files and standard fields if not provided
+        const fileInput = form.querySelector('input[name="files"]');
+        const hasFiles = fileInput && fileInput.files && fileInput.files.length > 0;
+        
+        // Create a temp input to validate only required fields
         if (!form.reportValidity()) return;
+        
         event.preventDefault();
 
         const submitBtn = form.querySelector("button[type='submit']");
