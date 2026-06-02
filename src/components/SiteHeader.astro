@@ -12,21 +12,32 @@ interface Props {
 const { currentPath, locale = "en" } = Astro.props;
 const isCs = locale === "cs";
 const links = isCs ? navLinksCs : navLinks;
-const homeHref = isCs ? "/cs/" : "/";
+const homeHref = isCs ? "/" : "/en/";
+
+const switchHref = (() => {
+  if (isCs) {
+    const p = currentPath.startsWith("/cs") ? currentPath.slice(3) : currentPath;
+    return `/en${p === "/" ? "/" : p}`;
+  } else {
+    const p = currentPath.startsWith("/en") ? currentPath.slice(3) : currentPath;
+    return `/cs${p === "/" ? "/" : p}`;
+  }
+})();
+
 const ui = isCs
   ? {
       tagline: "Zakázkový 3D tisk",
       primaryCta: "Nahrát soubor",
       menu: "Menu",
       switchLabel: "EN",
-      switchHref: `${currentPath.replace(/^\/cs/, "") || "/"}?lang=en`,
+      switchHref,
     }
   : {
       tagline: "Custom 3D printing service",
       primaryCta: "Upload Your File",
       menu: "Menu",
       switchLabel: "CZ",
-      switchHref: `/cs${currentPath === "/" ? "/" : currentPath}`,
+      switchHref,
     };
 
 const isActive = (href: string) =>
@@ -37,14 +48,12 @@ const isActive = (href: string) =>
   <Container>
     <div class="flex items-center justify-between gap-4 py-4">
       <a href={homeHref} class="flex items-center gap-3 text-white">
-        <span class="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5">
-          <span class="text-sm font-semibold tracking-[0.2em] text-amber-300">F3</span>
-        </span>
-        <span>
-          <span class="block text-sm font-semibold">{site.name}</span>
-          <span class="block text-xs text-stone-400">{ui.tagline}</span>
-        </span>
-      </a>
+            <img src="/favicon.svg" alt="{site.name}" class="h-11 w-11 rounded-2xl" />
+            <span>
+              <span class="block text-sm font-semibold">{site.name}</span>
+              <span class="block text-xs text-stone-400">{ui.tagline}</span>
+            </span>
+          </a>
 
       <nav class="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
         {links.map((link) => (

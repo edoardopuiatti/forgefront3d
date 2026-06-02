@@ -2,36 +2,34 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ButtonLink from "../components/ButtonLink.astro";
 import Container from "../components/Container.astro";
+import FAQList from "../components/FAQList.astro";
 import MaterialPreviewCard from "../components/MaterialPreviewCard.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import {
-  faqs,
-  fileTypes,
-  galleryItems,
-  homeUseCases,
-  materials,
-  proofPoints,
-  reasons,
-  site,
-  steps,
-  testimonials,
-  trustBarItems,
-} from "../data/site";
-
-// Server-side rewrite removed: keep root (/) as the English homepage
-// Language switching is handled by separate `/cs/` pages and the header links.
+  faqsCs,
+  fileTypesCs,
+  galleryItemsCs,
+  homeUseCasesCs,
+  materialsCs,
+  proofPointsCs,
+  reasonsCs,
+  siteCs,
+  stepsCs,
+  testimonialsCs,
+  trustBarItemsCs,
+} from "../data/site-cs";
 
 const homeStructuredData = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: site.name,
+  name: siteCs.name,
   url: "https://forgefront3d.com/",
-  description: site.description,
+  description: siteCs.description,
   areaServed: "Prague pickup and shipped orders",
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "3D printing services",
-    itemListElement: homeUseCases.map((item) => ({
+    name: "3D tiskové služby",
+    itemListElement: homeUseCasesCs.map((item) => ({
       "@type": "Offer",
       itemOffered: {
         "@type": "Service",
@@ -43,10 +41,10 @@ const homeStructuredData = {
 ---
 
 <BaseLayout
-  title="Custom 3D printing service"
-  description="Fast, practical 3D printing for replacement parts, prototypes, custom jobs, and short-run production in Prague. Upload a file and request a quote."
+  title="Zakázkový 3D tisk"
+  description="Nahrajte soubor a vyžádejte si cenovou nabídku na náhradní díly, prototypy, zakázkové výtisky a malé série s vyzvednutím v Praze 2 nebo zasláním."
   pathname="/"
-  locale="en"
+  locale="cs"
   structuredData={homeStructuredData}
 >
   <section class="overflow-hidden border-b border-white/10">

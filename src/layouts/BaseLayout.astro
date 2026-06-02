@@ -26,12 +26,14 @@ const pageTitle = title ? `${title} | ${site.name}` : site.title;
 const canonicalUrl = new URL(pathname, site.url).toString();
 const socialImage = new URL(ogImage, site.url).toString();
 const isCs = locale === "cs";
-const alternateEnPath = pathname.startsWith("/cs")
-  ? pathname.slice(3) || "/"
-  : pathname;
-const alternateCsPath = pathname.startsWith("/cs")
+const alternateEnPath = isCs
+  ? (pathname.startsWith("/cs") ? `/en${pathname.slice(3) || "/"}` : `/en${pathname}`)
+  : pathname.startsWith("/en")
   ? pathname
-  : `/cs${pathname === "/" ? "/" : pathname}`;
+  : pathname;
+const alternateCsPath = isCs
+  ? pathname
+  : (pathname.startsWith("/en") ? `/cs${pathname.slice(3) || "/"}` : `/cs${pathname === "/" ? "/" : pathname}`);
 const alternateEnUrl = new URL(alternateEnPath, site.url).toString();
 const alternateCsUrl = new URL(alternateCsPath, site.url).toString();
 const schema = structuredData ?? {
