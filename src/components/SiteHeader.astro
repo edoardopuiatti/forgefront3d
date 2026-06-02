@@ -19,7 +19,7 @@ const ui = isCs
       primaryCta: "Nahrát soubor",
       menu: "Menu",
       switchLabel: "EN",
-      switchHref: currentPath.replace(/^\/cs/, "") || "/",
+      switchHref: `${currentPath.replace(/^\/cs/, "") || "/"}?lang=en`,
     }
   : {
       tagline: "Custom 3D printing service",
