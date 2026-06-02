@@ -5,17 +5,19 @@ import { site } from "../../data/site";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { slug: post.id },
-    props: { post },
-  }));
+  return posts
+    .filter((post) => !post.id.startsWith("cs/"))
+    .map((post) => ({
+      params: { slug: post.id.replace(/^en\//, "") },
+      props: { post },
+    }));
 }
 
 const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} pathname={`/blog/${post.id.replace(/^en\//, "")}/`}>
   <article class="py-16">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
