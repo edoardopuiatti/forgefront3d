@@ -3,6 +3,7 @@ title: "What finish should I choose for my 3D print? A plain-English guide"
 description: "Understand standard 3D print finish, smoother appearance, functional finish choices, layer lines, support marks, sanding, assembly, and when finish matters."
 pubDate: 2026-05-11
 heroImage: "https://images.pexels.com/photos/31137459/pexels-photo-31137459.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
 
 # What finish should I choose for my 3D print? A plain-English guide
 

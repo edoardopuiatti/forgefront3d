@@ -3,6 +3,7 @@ title: "ForgeFront3D: how it works, what we print, and how to get started"
 description: "Learn what Forgefront 3D offers, how the quote process works, what materials are available, what files to send, and how Prague pickup and EU shipping work."
 pubDate: 2026-03-18
 heroImage: "https://images.pexels.com/photos/20552673/pexels-photo-20552673.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
 
 # ForgeFront3D: how it works, what we print, and how to get started
 

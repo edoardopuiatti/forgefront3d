@@ -11,12 +11,12 @@ const blogMetaSchema = z.object({
 });
 
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  loader: glob({ pattern: '*.md', base: './src/content/blog' }),
   schema: blogMetaSchema,
 });
 
 const blogCs = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/cs/blog' }),
+  loader: glob({ pattern: '*.md', base: './src/content/blog/cs' }),
   schema: blogMetaSchema,
 });
 

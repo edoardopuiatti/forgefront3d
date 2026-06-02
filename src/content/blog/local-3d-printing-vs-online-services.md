@@ -3,6 +3,7 @@ title: "Local 3D printing vs online services: when does each make sense?"
 description: "Compare local 3D printing services with larger online platforms, including turnaround, communication, pickup, shipping, pricing, and support."
 pubDate: 2026-03-27
 heroImage: "https://images.pexels.com/photos/33977799/pexels-photo-33977799.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
 
 # Local 3D printing vs online services: when does each make sense?
 

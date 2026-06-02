@@ -3,6 +3,7 @@ title: "STL vs STEP vs OBJ: which file format should you use for 3D printing?"
 description: "A practical comparison of STL, STEP, OBJ, and 3MF files for 3D printing, including when each format is useful and what to send for a quote."
 pubDate: 2026-04-20
 heroImage: "https://images.pexels.com/photos/26969628/pexels-photo-26969628.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
 
 # STL vs STEP vs OBJ: which file format should you use for 3D printing?
 

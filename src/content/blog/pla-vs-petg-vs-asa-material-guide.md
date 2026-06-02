@@ -3,6 +3,7 @@ title: "PLA vs PETG vs ASA: which 3D printing material is right for your project
 description: "Compare PLA, PETG, and ASA for strength, cost, durability, finish, heat resistance, and common 3D printing use cases."
 pubDate: 2026-04-28
 heroImage: "https://images.pexels.com/photos/19871842/pexels-photo-19871842.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
 
 # PLA vs PETG vs ASA: which 3D printing material is right for your project?
 

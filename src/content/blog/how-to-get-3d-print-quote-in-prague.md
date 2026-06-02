@@ -3,6 +3,7 @@ title: "How to get a 3D print quote in Prague: what to send and what to expect"
 description: "A step-by-step guide to requesting a 3D print quote in Prague, including files, materials, quantity, finish, pickup, EU shipping, and response time."
 pubDate: 2026-04-12
 heroImage: "https://images.pexels.com/photos/18296466/pexels-photo-18296466.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
 
 # How to get a 3D print quote in Prague: what to send and what to expect
 

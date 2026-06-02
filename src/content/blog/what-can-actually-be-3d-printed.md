@@ -3,6 +3,7 @@ title: "What can actually be 3D printed? A practical guide for beginners"
 description: "Examples of what can (and can't) reasonably be 3D printed, with practical tips."
 pubDate: 2026-04-05
 heroImage: "https://images.pexels.com/photos/18296450/pexels-photo-18296450.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
 
 # What can actually be 3D printed? A practical guide for beginners
 

@@ -3,6 +3,7 @@ title: "How much does 3D printing cost in Prague? (And what actually affects the
 description: "A practical explanation of 3D printing costs in Prague, including size, material, print time, quantity, complexity, finishing, urgency, and design work."
 pubDate: 2026-03-02
 heroImage: "https://images.pexels.com/photos/20552667/pexels-photo-20552667.jpeg?auto=compress&cs=tinysrgb&w=1600"
+---
 
 # How much does 3D printing cost in Prague? (And what actually affects the price)
 
